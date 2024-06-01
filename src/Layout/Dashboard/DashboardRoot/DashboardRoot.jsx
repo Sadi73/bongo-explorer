@@ -1,11 +1,16 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import Sidebar from '../Sidebar/Sidebar';
 
 const DashboardRoot = () => {
     return (
-        <div>
-            this is menu
-            <Outlet />
+        <div className='flex'>
+            <div>
+                <Sidebar />
+            </div>
+            <div>
+                <Outlet />
+            </div>
         </div>
     );
 };
