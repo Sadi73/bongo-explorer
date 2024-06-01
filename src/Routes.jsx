@@ -14,6 +14,8 @@ import RequestToAdmin from "./Layout/Dashboard/RequestToAdmin/RequestToAdmin";
 import MyAssignedTours from "./Layout/Dashboard/MyAssignedTours/MyAssignedTours";
 import AddNewPackage from "./Layout/Dashboard/AddNewPackage/AddNewPackage";
 import ManageUsers from "./Layout/Dashboard/ManageUsers/ManageUsers";
+import Login from "./Layout/Root/LoginOrRegister/Login";
+import Register from "./Layout/Root/LoginOrRegister/Register";
 
 export const router = createBrowserRouter([
     {
@@ -46,11 +48,11 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/login",
-                element: <StoryDetails />,
+                element: <Login />,
             },
             {
                 path: "/register",
-                element: <StoryDetails />,
+                element: <Register />,
             },
         ]
     },
