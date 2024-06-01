@@ -44,6 +44,14 @@ export const router = createBrowserRouter([
                 path: "/story/:storyId",
                 element: <StoryDetails />,
             },
+            {
+                path: "/login",
+                element: <StoryDetails />,
+            },
+            {
+                path: "/register",
+                element: <StoryDetails />,
+            },
         ]
     },
     {
