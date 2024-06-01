@@ -22,7 +22,7 @@ const TourTravel = () => {
 
 
     return (
-        <div className='md:w-[80%] mx-auto my-20'>
+        <div className='md:w-[80%] mx-auto my-20 h-screen'>
             <h1 className='text-3xl font-semibold text-center'>Tours And Travels</h1>
 
 
