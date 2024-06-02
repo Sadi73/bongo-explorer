@@ -22,13 +22,13 @@ const TourTravel = () => {
 
 
     return (
-        <div className='md:w-[80%] mx-auto my-20 h-screen'>
+        <div className='md:w-[80%] mx-auto my-20 min-h-screen'>
             <h1 className='text-3xl font-semibold text-center'>Tours And Travels</h1>
 
 
             <div style={{ background: 'white', paddingTop: '12px' }}>
 
-                <div style={{ display: 'flex', width: '520px', margin: 'auto', border: '1px solid #BDBDBD', borderRadius: '5px', minHeight: '45px' }}>
+                <div style={{ display: 'flex', maxWidth: '520px', margin: 'auto', border: '1px solid #BDBDBD', borderRadius: '5px', minHeight: '45px' }}>
                     <div style={{
                         ...styles.toggleBarItem,
                         border: selectedView === 'Overview' ? '1px solid #BDBDBD' : 'none',

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Packages = () => {
     return (
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-10'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-10 px-5 md:px-0'>
             <div className='flex border gap-5'>
                 <img src={image} alt="" className='w-1/2' />
                 <div className='flex flex-col p-3'>
