@@ -43,8 +43,8 @@ const TourType = () => {
                     style={{ padding: '0 5.5rem 0 2.5rem ' }}
                 >
                     {
-                        types.map(type =>
-                            <SwiperSlide>
+                        types.map((type, index) =>
+                            <SwiperSlide key={index}>
                                 <div
                                     style={{ width: '150px', height: '150px', border: '1px solid', borderRadius: '50%', }}
                                     className='flex flex-col items-center justify-center space-y-3'>
