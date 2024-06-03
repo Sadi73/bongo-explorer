@@ -1,10 +1,13 @@
 import React from 'react';
 import image1 from '../../../assets/Package Image/1.jpg'
+import { useNavigate } from 'react-router-dom';
 
 const AllPackages = () => {
+    const navigate = useNavigate();
+
     return (
         <div className='pt-20  w-[80%] mx-auto'>
-            <div className='h-[500px] w-96 relative'>
+            <div className='h-[500px] w-96 relative' onClick={()=>navigate('/package/1')}>
                 <img src={image1} alt="" className='h-full hover:scale-110 transition-transform duration-300' />
 
                 <div className='absolute top-0 right-0 text-white text-xl font-bold p-3'>
