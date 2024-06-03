@@ -2,15 +2,19 @@ import React from 'react';
 import Banner from './Banner/Banner';
 import TourTravel from './TourAndTravel/TourTravel';
 import TourType from './TourType/TourType';
+import Stories from './Stories/Stories';
 
 const Homepage = () => {
     return (
         <div>
-            <Banner/>
+            <Banner />
 
-            <TourTravel/>
+            <TourTravel />
 
-            <TourType/>
+            <TourType />
+
+            <Stories />
+
         </div>
     );
 };

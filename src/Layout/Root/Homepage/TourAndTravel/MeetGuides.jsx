@@ -24,9 +24,9 @@ const MeetGuides = () => {
             {/* <h1 className='text-center text-5xl'>Our Experts</h1> */}
 
             <Swiper
-                slidesPerView={6}
-                spaceBetween={30}
-                centeredSlides={true}
+                 slidesPerView={6}
+                 spaceBetween={30}
+                 grabCursor={true}
                 pagination={{
                     clickable: true,
                 }}
