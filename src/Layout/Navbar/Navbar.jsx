@@ -26,7 +26,7 @@ const Navbar = () => {
     ];
 
     return (
-        <div className='navbar shadow-lg fixed bg-black bg-opacity-50'>
+        <div className='navbar shadow-lg fixed bg-black bg-opacity-50 z-10'>
             <div className='navbar-start'>
                 {/* ------------ FOR MOBILE SCREEN -------------- */}
                 <div className='md:hidden'>

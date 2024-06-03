@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Divider, Input } from 'antd';
 import { UserOutlined, LockOutlined, MailOutlined, FileImageOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { Formik } from 'formik';
 
 const Register = () => {
 
@@ -30,83 +31,129 @@ const Register = () => {
 
                     <Divider>OR</Divider>
 
-                    <form className='space-y-5'
+
+                    <Formik
+                        initialValues={{ name: '', email: '', photoURL: '', password: '', confirmPassword: '' }}
+                        // validate={values => {
+                        //     const errors = {};
+                        //     if (!values.email) {
+                        //         errors.email = 'Required';
+                        //     } else if (
+                        //         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+                        //     ) {
+                        //         errors.email = 'Invalid email address';
+                        //     }
+                        //     return errors;
+                        // }}
+                        onSubmit={(values, { setSubmitting }) => {
+                            // setTimeout(() => {
+                            //     alert(JSON.stringify(values, null, 2));
+                            //     setSubmitting(false);
+                            // }, 400);
+                            console.log(values)
+                        }}
                     >
-                        <div className='w-3/4 mx-auto space-y-3'>
-                            <Input
-                                name='name'
-                                className='py-3 '
-                                placeholder="Name"
-                                prefix={
-                                    <UserOutlined
-                                        style={{
-                                            color: 'rgba(0,0,0,.25)',
-                                        }}
+                        {({
+                            values,
+                            errors,
+                            touched,
+                            handleChange,
+                            handleBlur,
+                            handleSubmit,
+                            isSubmitting,
+                            /* and other goodies */
+                        }) => (
+                            <form
+                                onClick={handleSubmit}
+                                className='space-y-5'
+                            >
+                                <div className='w-3/4 mx-auto space-y-3'>
+                                    <Input
+                                        name='name'
+                                        className='py-3 '
+                                        placeholder="Name"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        prefix={
+                                            <UserOutlined
+                                                style={{
+                                                    color: 'rgba(0,0,0,.25)',
+                                                }}
+                                            />
+                                        }
                                     />
-                                }
-                            />
 
-                            <Input
-                                name='email'
-                                className='py-3'
-                                placeholder="Email"
-                                prefix={
-                                    <MailOutlined
-                                        style={{
-                                            color: 'rgba(0,0,0,.25)',
-                                        }}
+                                    <Input
+                                        name='email'
+                                        className='py-3'
+                                        placeholder="Email"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        prefix={
+                                            <MailOutlined
+                                                style={{
+                                                    color: 'rgba(0,0,0,.25)',
+                                                }}
+                                            />
+                                        }
                                     />
-                                }
-                            />
 
-                            <Input
-                                name='photoURL'
-                                className='py-3'
-                                placeholder="PhotoURL"
-                                prefix={
-                                    <FileImageOutlined
-                                        style={{
-                                            color: 'rgba(0,0,0,.25)',
-                                        }}
+                                    <Input
+                                        name='photoURL'
+                                        className='py-3'
+                                        placeholder="PhotoURL"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        prefix={
+                                            <FileImageOutlined
+                                                style={{
+                                                    color: 'rgba(0,0,0,.25)',
+                                                }}
+                                            />
+                                        }
                                     />
-                                }
-                            />
 
 
-                            <Input.Password
-                                name='password'
-                                className='py-3'
-                                placeholder="Password"
-                                prefix={
-                                    <LockOutlined
-                                        style={{
-                                            color: 'rgba(0,0,0,.25)',
-                                        }}
+                                    <Input.Password
+                                        name='password'
+                                        className='py-3'
+                                        placeholder="Password"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        prefix={
+                                            <LockOutlined
+                                                style={{
+                                                    color: 'rgba(0,0,0,.25)',
+                                                }}
+                                            />
+                                        }
+
                                     />
-                                }
 
-                            />
+                                    <Input.Password
+                                        name='confirmPassword'
+                                        className='py-3'
+                                        placeholder="Confirm Password"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        prefix={
+                                            <LockOutlined
+                                                style={{
+                                                    color: 'rgba(0,0,0,.25)',
+                                                }}
+                                            />
+                                        }
 
-                            <Input.Password
-                                name='confirmPassword'
-                                className='py-3'
-                                placeholder="Confirm Password"
-                                prefix={
-                                    <LockOutlined
-                                        style={{
-                                            color: 'rgba(0,0,0,.25)',
-                                        }}
                                     />
-                                }
-
-                            />
-                        </div>
+                                </div>
 
 
-                        <div className='flex justify-center'>
-                            <button type='submit' className='bg-teal-500 text-white px-10 py-3 rounded-full'>Sign In</button>
-                        </div>
-                    </form>
+                                <div className='flex justify-center'>
+                                    <button type='submit' className='bg-teal-500 text-white px-10 py-3 rounded-full'>Sign In</button>
+                                </div>
+                            </form>
+                        )}
+                    </Formik>
 
                 </div>
             </div>
