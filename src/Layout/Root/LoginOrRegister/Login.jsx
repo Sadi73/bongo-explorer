@@ -1,10 +1,87 @@
 import { Button, Divider, Input } from 'antd';
-import React from 'react';
+import React, { useContext } from 'react';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
+import { AuthContext } from '../../../Providers/AuthProvider';
+import Swal from 'sweetalert2';
+import * as Yup from 'yup';
 
 const Login = () => {
+
+    const { logIn, googleSignIn } = useContext(AuthContext);
+
+    const navigate = useNavigate();
+
+    const validationSchema = Yup.object({
+        email: Yup.string().required('Email is required'),
+        password: Yup.string().required('Password is required'),
+    });
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(result => {
+                if (result?.user?.email) {
+                    let timerInterval;
+                    Swal.fire({
+                        title: "Congratulation!!!",
+                        html: "You have Logged in your account",
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const timer = Swal.getPopup().querySelector("b");
+                            timerInterval = setInterval(() => {
+                                timer.textContent = `${Swal.getTimerLeft()}`;
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            navigate('/')
+                        }
+                    });
+                }
+            })
+            .catch(error => console.log(error))
+    };
+
+    const handleLogIn = (email, password) => {
+        logIn(email, password)
+            .then(result => {
+                if (result?.user?.email) {
+                    let timerInterval;
+                    Swal.fire({
+                        title: "Congratulation!!!",
+                        html: "You have logged in your account",
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                            const timer = Swal.getPopup().querySelector("b");
+                            timerInterval = setInterval(() => {
+                                timer.textContent = `${Swal.getTimerLeft()}`;
+                            }, 100);
+                        },
+                        willClose: () => {
+                            clearInterval(timerInterval);
+                        }
+                    }).then((result) => {
+                        /* Read more about handling dismissals below */
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            navigate('/')
+                        }
+                    });
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    };
+
 
     return (
         <div className='md:pt-20'>
@@ -14,6 +91,7 @@ const Login = () => {
                         <h1 className='text-center text-3xl text-teal-500 font-semibold'>Sign In to Bongo Explorers</h1>
                         <div className='flex justify-center'>
                             <Button type="" shape="circle"
+                                onClick={handleGoogleSignIn}
                             >
                                 G
                             </Button>
@@ -26,23 +104,9 @@ const Login = () => {
 
                         <Formik
                             initialValues={{ email: '', password: '' }}
-                            // validate={values => {
-                            //     const errors = {};
-                            //     if (!values.email) {
-                            //         errors.email = 'Required';
-                            //     } else if (
-                            //         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                            //     ) {
-                            //         errors.email = 'Invalid email address';
-                            //     }
-                            //     return errors;
-                            // }}
+                            validationSchema={validationSchema}
                             onSubmit={(values, { setSubmitting }) => {
-                                // setTimeout(() => {
-                                //     alert(JSON.stringify(values, null, 2));
-                                //     setSubmitting(false);
-                                // }, 400);
-                                console.log(values)
+                                handleLogIn(values?.email, values?.password)
                             }}
                         >
                             {({

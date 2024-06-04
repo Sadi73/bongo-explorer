@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Navbar.css';
 import MenuBar from './MenuBar';
 import { Link } from 'react-router-dom';
 import { Avatar, Dropdown } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 
 
 const Navbar = () => {
 
-    const [user, setUser] = useState(null);
+    const { user, logOut } = useContext(AuthContext);
+
+    const handleLogOut = () => {
+        logOut()
+            .then(res => console.log(res))
+            .catch(error => console.log(error))
+    };
 
     const items = [
         {
@@ -21,7 +28,7 @@ const Navbar = () => {
         {
             label: 'Log Out',
             key: '2',
-            // onClick: () => handleLogOut()
+            onClick: () => handleLogOut()
         },
     ];
 
@@ -49,31 +56,32 @@ const Navbar = () => {
 
             <div className='navbar-end'>
                 {/* -------------- LOGIN & REGISTER BUTTON ------------ */}
-                <div className='flex gap-3'>
-                    <Link to="/login"><button className='border px-3 py-1 rounded-md text-[#FFF8DC] border-[#FFF8DC] hover:bg-[#FFF8DC] hover:text-black'>Login</button></Link>
-                    <Link to="/register"><button className='border px-3 py-1 rounded-md text-[#FFF8DC] border-[#FFF8DC] hover:bg-[#FFF8DC] hover:text-black'>Register</button></Link>
-                </div>
+                {!user ?
+                    <div className='flex gap-3'>
+                        <Link to="/login"><button className='border px-3 py-1 rounded-md text-[#FFF8DC] border-[#FFF8DC] hover:bg-[#FFF8DC] hover:text-black'>Login</button></Link>
+                        <Link to="/register"><button className='border px-3 py-1 rounded-md text-[#FFF8DC] border-[#FFF8DC] hover:bg-[#FFF8DC] hover:text-black'>Register</button></Link>
+                    </div> :
+                    <div className='flex gap-2 items-center'>
+                        <div className='text-sm text-white'>
+                            {user?.email}
+                        </div>
+                        <Dropdown
+                            menu={{ items }}
+                            trigger={['click']}
+                        >
+                            <Avatar
+                                src={user?.photoURL}
+                                style={{
+                                    backgroundColor: '#87d068',
+                                    cursor: 'pointer',
+                                }}
+                                icon={<UserOutlined />}
+                            />
 
-                {/* ---------------- PROFILE SECTION -------------- */}
-                {/* <div className='flex gap-2 items-center'>
-                    <div className='text-sm'>
-                        {user?.email}
+                        </Dropdown>
                     </div>
-                    <Dropdown
-                        menu={{ items }}
-                        trigger={['click']}
-                    >
-                        <Avatar
-                            src={user?.photoURL}
-                            style={{
-                                backgroundColor: '#87d068',
-                                cursor: 'pointer',
-                            }}
-                            icon={<UserOutlined />}
-                        />
+                }
 
-                    </Dropdown>
-                </div> */}
             </div>
 
         </div >
