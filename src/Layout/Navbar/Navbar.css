@@ -8,7 +8,8 @@
 
 .navbar-start {
     display: flex;
-    width: 50%;
+    max-width: 50%;
+    min-width: 28%;
     align-items: center;
     gap: 10px;
 }

@@ -75,8 +75,9 @@ const adminItems = [
     }
 ];
 
-const Sidebar = () => {
+const Sidebar = ({ userInfo }) => {
     const [current, setCurrent] = useState('1');
+    const role = userInfo?.[0]?.role;
 
     const onClick = (e) => {
         setCurrent(e.key);
@@ -95,7 +96,7 @@ const Sidebar = () => {
                 defaultOpenKeys={['1']}
                 selectedKeys={[current]}
                 mode="inline"
-                items={userItems}
+                items={role === 'USER' ? userItems : role === 'ADMIN' ? adminItems : guideItems}
             />
         </div>
     );

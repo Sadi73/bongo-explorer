@@ -40,7 +40,7 @@ const Navbar = () => {
                     <MenuBar />
                 </div>
 
-                <Link to="/"><button className='text-3xl font-medium text-[#FFF8DC]'>Bongo Explorer</button></Link>
+                <Link to="/"><button className='text-lg md:text-3xl font-medium text-[#FFF8DC]'>Bongo Explorer</button></Link>
             </div>
 
 
