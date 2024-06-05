@@ -6,6 +6,7 @@ import { Formik } from 'formik';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 import * as Yup from 'yup';
+import axios from 'axios';
 
 const Register = () => {
 
@@ -17,28 +18,36 @@ const Register = () => {
         googleSignIn()
             .then(result => {
                 if (result?.user?.email) {
-                    let timerInterval;
-                    Swal.fire({
-                        title: "Congratulation!!!",
-                        html: "You have logged in your account",
-                        timer: 2000,
-                        timerProgressBar: true,
-                        didOpen: () => {
-                            Swal.showLoading();
-                            const timer = Swal.getPopup().querySelector("b");
-                            timerInterval = setInterval(() => {
-                                timer.textContent = `${Swal.getTimerLeft()}`;
-                            }, 100);
-                        },
-                        willClose: () => {
-                            clearInterval(timerInterval);
+                    axios.post('http://localhost:5000/users', {
+                        name: result?.user?.displayname,
+                        email: result?.user?.email,
+                        role: 'USER'
+                    }).then(res => {
+                        if (res?.data) {
+                            let timerInterval;
+                            Swal.fire({
+                                title: "Congratulation!!!",
+                                html: "You have created a new account",
+                                timer: 2000,
+                                timerProgressBar: true,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                    const timer = Swal.getPopup().querySelector("b");
+                                    timerInterval = setInterval(() => {
+                                        timer.textContent = `${Swal.getTimerLeft()}`;
+                                    }, 100);
+                                },
+                                willClose: () => {
+                                    clearInterval(timerInterval);
+                                }
+                            }).then((result) => {
+                                /* Read more about handling dismissals below */
+                                if (result.dismiss === Swal.DismissReason.timer) {
+                                    navigate('/')
+                                }
+                            });
                         }
-                    }).then((result) => {
-                        /* Read more about handling dismissals below */
-                        if (result.dismiss === Swal.DismissReason.timer) {
-                            navigate('/')
-                        }
-                    });
+                    }).catch(error => console.log(error))
                 }
             })
             .catch(error => console.log(error))
@@ -89,28 +98,38 @@ const Register = () => {
                                 registerAccount(values?.email, values?.password)
                                     .then(result => {
                                         if (result?.user?.email) {
-                                            let timerInterval;
-                                            Swal.fire({
-                                                title: "Congratulation!!!",
-                                                html: "You have created a new account",
-                                                timer: 2000,
-                                                timerProgressBar: true,
-                                                didOpen: () => {
-                                                    Swal.showLoading();
-                                                    const timer = Swal.getPopup().querySelector("b");
-                                                    timerInterval = setInterval(() => {
-                                                        timer.textContent = `${Swal.getTimerLeft()}`;
-                                                    }, 100);
-                                                },
-                                                willClose: () => {
-                                                    clearInterval(timerInterval);
+                                            axios.post('http://localhost:5000/users', {
+                                                name: result?.user?.displayname,
+                                                email: result?.user?.email,
+                                                role: 'USER'
+                                            }).then(res => {
+                                                if (res?.data) {
+                                                    let timerInterval;
+                                                    Swal.fire({
+                                                        title: "Congratulation!!!",
+                                                        html: "You have created a new account",
+                                                        timer: 2000,
+                                                        timerProgressBar: true,
+                                                        didOpen: () => {
+                                                            Swal.showLoading();
+                                                            const timer = Swal.getPopup().querySelector("b");
+                                                            timerInterval = setInterval(() => {
+                                                                timer.textContent = `${Swal.getTimerLeft()}`;
+                                                            }, 100);
+                                                        },
+                                                        willClose: () => {
+                                                            clearInterval(timerInterval);
+                                                        }
+                                                    }).then((result) => {
+                                                        /* Read more about handling dismissals below */
+                                                        if (result.dismiss === Swal.DismissReason.timer) {
+                                                            navigate('/')
+                                                        }
+                                                    });
                                                 }
-                                            }).then((result) => {
-                                                /* Read more about handling dismissals below */
-                                                if (result.dismiss === Swal.DismissReason.timer) {
-                                                    navigate('/')
-                                                }
-                                            });
+                                            }).catch(error => console.log(error))
+
+
                                         }
                                     })
                                     .catch(error => {
