@@ -1,9 +1,11 @@
 import React from 'react';
+import PackageCard from '../PackageCard/PackageCard';
 
 const MyBookings = () => {
     return (
-        <div>
-            MyBookings
+        <div className='mt-10'>
+            <PackageCard/>
+
         </div>
     );
 };

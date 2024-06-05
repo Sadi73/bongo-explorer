@@ -8,7 +8,7 @@ const DashboardRoot = () => {
             <div>
                 <Sidebar />
             </div>
-            <div>
+            <div className='grow px-5'>
                 <Outlet />
             </div>
         </div>

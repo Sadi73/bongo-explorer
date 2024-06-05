@@ -1,9 +1,10 @@
 import React from 'react';
+import PackageCard from '../PackageCard/PackageCard';
 
 const MyWishlist = () => {
     return (
-        <div>
-            MyWishlist
+        <div className='mt-10'>
+            <PackageCard/>
         </div>
     );
 };
