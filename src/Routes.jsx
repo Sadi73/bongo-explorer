@@ -16,6 +16,7 @@ import AddNewPackage from "./Layout/Dashboard/AddNewPackage/AddNewPackage";
 import ManageUsers from "./Layout/Dashboard/ManageUsers/ManageUsers";
 import Login from "./Layout/Root/LoginOrRegister/Login";
 import Register from "./Layout/Root/LoginOrRegister/Register";
+import PrivateRoute from "./Layout/PrivateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -32,7 +33,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "/package/:packageId",
-                element: <PackageDetails />,
+                element: <PrivateRoute><PackageDetails /></PrivateRoute>,
             },
             {
                 path: "/profile/guide",
@@ -58,7 +59,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/dashboard",
-        element: <DashboardRoot />,
+        element: <PrivateRoute><DashboardRoot /></PrivateRoute>,
         children: [
             {
                 path: "/dashboard",

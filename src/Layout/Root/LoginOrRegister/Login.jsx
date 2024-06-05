@@ -1,7 +1,7 @@
 import { Button, Divider, Input } from 'antd';
 import React, { useContext } from 'react';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
@@ -13,6 +13,7 @@ const Login = () => {
     const { logIn, googleSignIn } = useContext(AuthContext);
 
     const navigate = useNavigate();
+    const location = useLocation();
 
     const validationSchema = Yup.object({
         email: Yup.string().required('Email is required'),
@@ -23,7 +24,7 @@ const Login = () => {
         googleSignIn()
             .then(result => {
                 if (result?.user?.email) {
-                    axios.post('http://localhost:5000/users', {
+                    axios.post('http://192.168.1.4:5000/users', {
                         name: result?.user?.displayname,
                         email: result?.user?.email,
                         role: 'USER'
@@ -48,7 +49,7 @@ const Login = () => {
                             }).then((result) => {
                                 /* Read more about handling dismissals below */
                                 if (result.dismiss === Swal.DismissReason.timer) {
-                                    navigate('/')
+                                    navigate(location?.state ? location?.state : '/')
                                 }
                             });
                         }
@@ -81,7 +82,7 @@ const Login = () => {
                     }).then((result) => {
                         /* Read more about handling dismissals below */
                         if (result.dismiss === Swal.DismissReason.timer) {
-                            navigate('/')
+                            navigate(location?.state ? location?.state : '/')
                         }
                     });
                 }
