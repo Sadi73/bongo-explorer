@@ -7,6 +7,8 @@ import { AuthContext } from '../../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { updateProfile } from 'firebase/auth';
+import auth from '../../../Firebase/firebase.config';
 
 const Register = () => {
 
@@ -54,10 +56,13 @@ const Register = () => {
     };
 
     const validationSchema = Yup.object({
+        name: Yup.string().required('Name is required'),
         email: Yup.string().required('Email is required'),
+        photoURL: Yup.string().required('PhotoURL is required'),
         password: Yup.string().required('Password is required'),
-        confirmPassword: Yup.string().required('Confirm Password is required'),
-
+        confirmPassword: Yup.string()
+            .required('Confirm Password is required')
+            .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     });
 
 
@@ -98,38 +103,42 @@ const Register = () => {
                                 registerAccount(values?.email, values?.password)
                                     .then(result => {
                                         if (result?.user?.email) {
-                                            axios.post('https://bongo-traveler.vercel.app/users', {
-                                                name: result?.user?.displayname,
-                                                email: result?.user?.email,
-                                                role: 'USER'
-                                            }).then(res => {
-                                                if (res?.data) {
-                                                    let timerInterval;
-                                                    Swal.fire({
-                                                        title: "Congratulation!!!",
-                                                        html: "You have created a new account",
-                                                        timer: 2000,
-                                                        timerProgressBar: true,
-                                                        didOpen: () => {
-                                                            Swal.showLoading();
-                                                            const timer = Swal.getPopup().querySelector("b");
-                                                            timerInterval = setInterval(() => {
-                                                                timer.textContent = `${Swal.getTimerLeft()}`;
-                                                            }, 100);
-                                                        },
-                                                        willClose: () => {
-                                                            clearInterval(timerInterval);
-                                                        }
-                                                    }).then((result) => {
-                                                        /* Read more about handling dismissals below */
-                                                        if (result.dismiss === Swal.DismissReason.timer) {
-                                                            navigate('/')
-                                                        }
-                                                    });
-                                                }
+                                            updateProfile(auth.currentUser, {
+                                                displayName: values?.name,
+                                                photoURL: values?.photoURL
+                                            }).then(() => {
+                                                axios.post('https://bongo-traveler.vercel.app/users', {
+                                                    name: result?.user?.displayName,
+                                                    email: result?.user?.email,
+                                                    photoURL: result?.user?.photoURL,
+                                                    role: 'USER'
+                                                }).then(res => {
+                                                    if (res?.data) {
+                                                        let timerInterval;
+                                                        Swal.fire({
+                                                            title: "Congratulation!!!",
+                                                            html: "You have created a new account",
+                                                            timer: 2000,
+                                                            timerProgressBar: true,
+                                                            didOpen: () => {
+                                                                Swal.showLoading();
+                                                                const timer = Swal.getPopup().querySelector("b");
+                                                                timerInterval = setInterval(() => {
+                                                                    timer.textContent = `${Swal.getTimerLeft()}`;
+                                                                }, 100);
+                                                            },
+                                                            willClose: () => {
+                                                                clearInterval(timerInterval);
+                                                            }
+                                                        }).then((result) => {
+                                                            /* Read more about handling dismissals below */
+                                                            if (result.dismiss === Swal.DismissReason.timer) {
+                                                                navigate('/')
+                                                            }
+                                                        });
+                                                    }
+                                                }).catch(error => console.log(error))
                                             }).catch(error => console.log(error))
-
-
                                         }
                                     })
                                     .catch(error => {
@@ -148,14 +157,15 @@ const Register = () => {
                                 /* and other goodies */
                             }) => (
                                 <form
-                                    onClick={handleSubmit}
+                                    onSubmit={handleSubmit}
                                     className='space-y-5'
                                 >
                                     <div className='w-3/4 mx-auto space-y-3'>
                                         <Input
                                             name='name'
-                                            className='py-3 '
+                                            className={`py-3 ${(touched?.name && errors?.name) ? 'border-2 border-red-300' : ''}`}
                                             placeholder="Name"
+                                            value={values?.name}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             prefix={
@@ -166,11 +176,13 @@ const Register = () => {
                                                 />
                                             }
                                         />
+                                        {(touched?.name && errors?.name) && <p className='text-red-300'>{errors.name}</p>}
 
                                         <Input
                                             name='email'
-                                            className={`py-3 ${errors?.email ? 'border border-2 border-red' : ''}`}
+                                            className={`py-3 ${(touched?.email && errors?.email) ? 'border-2 border-red-300' : ''}`}
                                             placeholder="Email"
+                                            value={values?.email}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             prefix={
@@ -181,11 +193,13 @@ const Register = () => {
                                                 />
                                             }
                                         />
+                                        {(touched?.email && errors?.email) && <p className='text-red-300'>{errors.email}</p>}
 
                                         <Input
                                             name='photoURL'
-                                            className='py-3'
+                                            className={`py-3 ${(touched?.photoURL && errors?.photoURL) ? 'border-2 border-red-300' : ''}`}
                                             placeholder="PhotoURL"
+                                            value={values?.photoURL}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             prefix={
@@ -196,12 +210,14 @@ const Register = () => {
                                                 />
                                             }
                                         />
+                                        {(touched?.photoURL && errors?.photoURL) && <p className='text-red-300'>{errors.photoURL}</p>}
 
 
                                         <Input.Password
                                             name='password'
-                                            className='py-3'
+                                            className={`py-3 ${(touched?.password && errors?.password) ? 'border-2 border-red-300' : ''}`}
                                             placeholder="Password"
+                                            value={values?.password}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             prefix={
@@ -213,11 +229,13 @@ const Register = () => {
                                             }
 
                                         />
+                                        {(touched?.password && errors?.password) && <p className='text-red-300'>{errors.password}</p>}
 
                                         <Input.Password
                                             name='confirmPassword'
-                                            className='py-3'
+                                            className={`py-3 ${(touched?.confirmPassword && errors?.confirmPassword) ? 'border-2 border-red-300' : ''}`}
                                             placeholder="Confirm Password"
+                                            value={values?.confirmPassword}
                                             onChange={handleChange}
                                             onBlur={handleBlur}
                                             prefix={
@@ -229,6 +247,7 @@ const Register = () => {
                                             }
 
                                         />
+                                        {(touched?.confirmPassword && errors?.confirmPassword) && <p className='text-red-300'>{errors.confirmPassword}</p>}
                                     </div>
 
 

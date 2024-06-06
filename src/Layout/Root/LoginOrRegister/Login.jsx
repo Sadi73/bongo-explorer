@@ -1,5 +1,5 @@
 import { Button, Divider, Input } from 'antd';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Formik } from 'formik';
@@ -11,6 +11,7 @@ import axios from 'axios';
 const Login = () => {
 
     const { logIn, googleSignIn } = useContext(AuthContext);
+    const [loginError, setLoginError] = useState(false);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -23,9 +24,10 @@ const Login = () => {
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(result => {
+                debugger
                 if (result?.user?.email) {
                     axios.post('https://bongo-traveler.vercel.app/users', {
-                        name: result?.user?.displayname,
+                        name: result?.user?.displayName,
                         email: result?.user?.email,
                         role: 'USER'
                     }).then(res => {
@@ -62,6 +64,7 @@ const Login = () => {
     const handleLogIn = (email, password) => {
         logIn(email, password)
             .then(result => {
+                console.log(result)
                 if (result?.user?.email) {
                     let timerInterval;
                     Swal.fire({
@@ -88,7 +91,8 @@ const Login = () => {
                 }
             })
             .catch(error => {
-                console.log(error)
+                setLoginError(true);
+                console.log('error: ',error)
             })
     };
 
@@ -109,8 +113,7 @@ const Login = () => {
 
                         <Divider>OR</Divider>
 
-
-
+                        {loginError && <p className='text-red-500'>Wrong Email or Password</p>}
 
                         <Formik
                             initialValues={{ email: '', password: '' }}
@@ -135,9 +138,11 @@ const Login = () => {
                                 >
                                     <Input
                                         name='email'
-                                        className='py-3'
+                                        className={`py-3 ${(touched?.email && errors?.email) ? 'border-2 border-red-500' : ''}`}
                                         placeholder="Email"
+                                        value={values?.email}
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
                                         prefix={
                                             <MailOutlined
                                                 style={{
@@ -146,13 +151,16 @@ const Login = () => {
                                             />
                                         }
                                     />
+                                    {(touched?.email && errors?.email) && <p className='text-red-500'>{errors.email}</p>}
 
 
                                     <Input.Password
                                         name='password'
-                                        className='py-3'
+                                        className={`py-3 ${(touched?.password && errors?.password) ? 'border-2 border-red-500' : ''}`}
                                         placeholder="Password"
+                                        value={values?.password}
                                         onChange={handleChange}
+                                        onBlur={handleBlur}
                                         prefix={
                                             <LockOutlined
                                                 style={{
@@ -162,6 +170,7 @@ const Login = () => {
                                         }
 
                                     />
+                                    {(touched?.password && errors?.password) && <p className='text-red-500'>{errors.password}</p>}
 
 
                                     <div className='flex justify-center'>
