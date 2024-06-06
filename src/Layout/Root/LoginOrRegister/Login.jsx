@@ -24,7 +24,7 @@ const Login = () => {
         googleSignIn()
             .then(result => {
                 if (result?.user?.email) {
-                    axios.post('http://192.168.1.4:5000/users', {
+                    axios.post('https://bongo-traveler.vercel.app/users', {
                         name: result?.user?.displayname,
                         email: result?.user?.email,
                         role: 'USER'

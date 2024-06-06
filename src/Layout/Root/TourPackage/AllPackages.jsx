@@ -8,7 +8,7 @@ const AllPackages = () => {
     const [AllPackagesList, setAllPackagesList] = useState([])
 
     useEffect(() => {
-        axios.get('http://192.168.1.4:5000/packages/all')
+        axios.get('https://bongo-traveler.vercel.app/packages/all')
             .then(res => {
                 console.log(res)
                 if (res?.data) {
@@ -20,7 +20,6 @@ const AllPackages = () => {
             })
     }, []);
 
-    console.log(AllPackagesList)
 
     return (
         <div className='pt-20  md:w-[80%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10'>

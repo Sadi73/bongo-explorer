@@ -13,7 +13,7 @@ const DashboardRoot = () => {
     const [userInfo, setUserInfo] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://192.168.1.4:5000/users?email=${user?.email}`)
+        axios.get(`https://bongo-traveler.vercel.app/users?email=${user?.email}`)
             .then(res => {
                 if (res?.data) {
                     setUserInfo(res?.data)

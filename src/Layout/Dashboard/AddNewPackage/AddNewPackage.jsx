@@ -8,7 +8,7 @@ import axios from 'axios';
 const AddNewPackage = () => {
 
     const handleAddPackage = (formdata) => {
-        axios.post('http://192.168.1.4:5000/packages/all', formdata)
+        axios.post('https://bongo-traveler.vercel.app/packages/all', formdata)
             .then(res => {
                 console.log(res)
             })
