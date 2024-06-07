@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import image1 from '../../../assets/Package Image/2.png';
 import image2 from '../../../assets/Package Image/3.png';
 import image3 from '../../../assets/Package Image/4.png';
@@ -9,6 +9,8 @@ import image7 from '../../../assets/Package Image/8.png';
 import { Collapse } from 'antd';
 import MeetGuides from '../Homepage/TourAndTravel/MeetGuides';
 import BookNowModal from './BookNowModal';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const images = [image1, image2, image3, image4, image5, image6, image7];
 
@@ -38,6 +40,20 @@ const items = [
 
 const PackageDetails = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [packageDetails, setPackageDetails] = useState({});
+
+    const params = useParams();
+
+    useEffect(() => {
+        axios.get(`https://bongo-traveler.vercel.app/package/${parseInt(params?.packageId)}`)
+            .then(res => {
+                if (res?.data?.[0]) {
+                    setPackageDetails(res?.data?.[0])
+                }
+            })
+            .catch(error => console.log(error))
+    }, []);
+
 
     return (
         <>

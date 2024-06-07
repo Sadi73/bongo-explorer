@@ -10,7 +10,6 @@ const AllPackages = () => {
     useEffect(() => {
         axios.get('https://bongo-traveler.vercel.app/packages/all')
             .then(res => {
-                console.log(res)
                 if (res?.data) {
                     setAllPackagesList(res?.data)
                 }
@@ -24,7 +23,7 @@ const AllPackages = () => {
     return (
         <div className='pt-20  md:w-[80%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10'>
             {AllPackagesList.map(eachPackage =>
-                <div key={eachPackage?._id} className='h-[500px] w-96 relative' onClick={() => navigate('/package/1')}>
+                <div key={eachPackage?.id} className='h-[500px] w-96 relative' onClick={() => navigate(`/package/${eachPackage?.id}`)}>
                     <img src={image1} alt="" className='h-full hover:scale-110 transition-transform duration-300' />
 
                     <div className='absolute top-0 right-0 text-white text-xl font-bold p-3'>
