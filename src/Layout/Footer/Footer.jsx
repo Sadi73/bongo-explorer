@@ -7,7 +7,7 @@ import { IoLogoYoutube } from 'react-icons/io';
 
 const Footer = () => {
     return (
-        <div className='mt-20'>
+        <div id='contact-us-footer' className='mt-20'>
             <div className='md:w-[80%] mx-auto flex justify-between gap-10 uppercase'>
                 <div className='w-1/3'>
                     <Divider>Where We Are</Divider>

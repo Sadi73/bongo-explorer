@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import './Navbar.css';
 import MenuBar from './MenuBar';
 import { Link } from 'react-router-dom';
 import { Avatar, Dropdown } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { AuthContext } from '../../Providers/AuthProvider';
+import logo from '../../assets/logo.png';
 
 
 
@@ -22,7 +23,7 @@ const Navbar = () => {
         {
             key: '1',
             label: (
-                <Link to="/update-profile">Update Profile</Link>
+                <Link to="/dashboard">Dashboard</Link>
             ),
         },
         {
@@ -33,24 +34,27 @@ const Navbar = () => {
     ];
 
     return (
-        <div className='navbar shadow-lg fixed bg-black bg-opacity-50 z-10'>
+        <div className='navbar shadow-lg fixed bg-black bg-opacity-50 z-10 pr-20'>
             <div className='navbar-start'>
                 {/* ------------ FOR MOBILE SCREEN -------------- */}
                 <div className='md:hidden'>
                     <MenuBar />
                 </div>
 
-                <Link to="/"><button className='text-lg md:text-3xl font-medium text-[#FFF8DC]'>Bongo Explorer</button></Link>
+                <Link to="/"><button className='text-lg md:text-3xl font-medium text-[#FFF8DC] flex items-center'>
+                    <img src={logo} alt="" className='w-16'/> Bongo Explorer
+                </button></Link>
             </div>
 
 
             {/* ------------------- FOR MEDIUM DEVICE -------------------- */}
-            <div className='navbar-center hidden md:flex'>
+            <div className='navbar-center w-1/2 hidden md:flex justify-center'>
                 <ul className='menu menu-horizontal '>
                     <li className='mx-5 text-[#FFF8DC]'><Link to="/">Home</Link></li>
                     <li className='mx-5 text-[#FFF8DC]'><Link to="/package/all">Packages</Link></li>
-                    <li className='mx-5 text-[#FFF8DC]'><Link to="/story/all">Stories</Link></li>
-                    <li className='mx-5 text-[#FFF8DC]'><Link to="/dashboard">Dashboard</Link></li>
+                    <li className='mx-5 text-[#FFF8DC]'><Link to="/story/all">Blogs</Link></li>
+                    {/* <li className='mx-5 text-[#FFF8DC]'><Link to="">Contact Us</Link></li> */}
+                    <li className='mx-5 text-[#FFF8DC]'><a href="#contact-us-footer">Contact Us</a></li>
                 </ul>
             </div>
 

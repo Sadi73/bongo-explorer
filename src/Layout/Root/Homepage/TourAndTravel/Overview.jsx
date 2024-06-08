@@ -1,20 +1,19 @@
 import React from 'react';
 import travelImage from '../../../../assets/hiking.jpg'
+import ReactPlayer from 'react-player';
 
 const Overview = () => {
     return (
-        <div className='flex gap-3 mt-10'>
-            <div>
-                <h1>HI!I’M MELISSA</h1>
-                <h1>LET’S GO TRAVEL</h1>
+        <div className='video-wrapper w-full h-[500px] flex justify-center items-center mt-10'>
 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nostrum in beatae nihil velit expedita eaque voluptates amet? Adipisci labore facilis minima facere quisquam. Alias vero suscipit quia rem quas?</p>
-            </div>
-
-            <div>
-                <img src={travelImage} alt="" />
-            </div>
-
+            <iframe
+                width="100%"
+                height="100%"
+                src="https://www.youtube.com/embed/QNUSIOMb6vI?rel=0&modestbranding=1&controls=1&showinfo=0"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+            ></iframe>
         </div>
     );
 };
