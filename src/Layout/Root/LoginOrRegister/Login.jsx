@@ -24,7 +24,6 @@ const Login = () => {
     const handleGoogleSignIn = () => {
         googleSignIn()
             .then(result => {
-                debugger
                 if (result?.user?.email) {
                     axios.post('https://bongo-traveler.vercel.app/users', {
                         name: result?.user?.displayName,
@@ -64,7 +63,6 @@ const Login = () => {
     const handleLogIn = (email, password) => {
         logIn(email, password)
             .then(result => {
-                console.log(result)
                 if (result?.user?.email) {
                     let timerInterval;
                     Swal.fire({

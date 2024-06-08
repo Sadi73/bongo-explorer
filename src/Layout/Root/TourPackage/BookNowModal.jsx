@@ -64,7 +64,7 @@ const BookNowModal = ({ isModalOpen, setIsModalOpen }) => {
                     onSubmit={(values, { setSubmitting }) => {
                         console.log(values);
 
-                        axios.post('http://localhost:5000/book-package', {...values, package: params?.packageId})
+                        axios.post('https://bongo-traveler.vercel.app/book-package', {...values, package: params?.packageId})
                             .then(res => {
                                 console.log(res)
                             })

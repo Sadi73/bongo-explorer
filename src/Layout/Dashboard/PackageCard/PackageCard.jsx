@@ -2,9 +2,9 @@ import React from 'react';
 import img from '../../../assets/hiking.jpg';
 import { Button } from 'antd';
 
-const PackageCard = () => {
+const PackageCard = ({packageInfo}) => {
     return (
-        <div className='flex gap-10 border shadow-xl rounded-lg'>
+        <div className='flex gap-10 border shadow-xl rounded-lg p-5'>
             <div>
                 <img src={img} alt="" className='w-96 rounded-lg' />
             </div>
