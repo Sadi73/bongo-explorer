@@ -19,7 +19,13 @@ const items = [
   {
     key: '3',
     label: (
-      <Link to="/story/all">Stories</Link>
+      <Link to="/story/all">Blogs</Link>
+    )
+  },
+  {
+    key: '4',
+    label: (
+      <a href="#contact-us-footer">Contact Us</a>
     )
   }
 

@@ -53,7 +53,6 @@ const Navbar = () => {
                     <li className='mx-5 text-[#FFF8DC]'><Link to="/">Home</Link></li>
                     <li className='mx-5 text-[#FFF8DC]'><Link to="/package/all">Packages</Link></li>
                     <li className='mx-5 text-[#FFF8DC]'><Link to="/story/all">Blogs</Link></li>
-                    {/* <li className='mx-5 text-[#FFF8DC]'><Link to="">Contact Us</Link></li> */}
                     <li className='mx-5 text-[#FFF8DC]'><a href="#contact-us-footer">Contact Us</a></li>
                 </ul>
             </div>
