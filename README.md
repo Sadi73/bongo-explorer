@@ -14,7 +14,7 @@ package = {title, type, photo,price, description}
 
 6. /book-package/:packageId - book a package
 
-7. /add-package - for admin to add new package
+7. /packages/add - for admin to add new package
 
 8. /bookings/all
  /bookings/:email

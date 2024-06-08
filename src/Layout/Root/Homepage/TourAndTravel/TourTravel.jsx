@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Overview from './Overview';
 import Packages from './Packages';
 import MeetGuides from './MeetGuides';
+import axios from 'axios';
 
 const styles = {
     toggleBarItem: {
@@ -19,7 +20,17 @@ const styles = {
 const TourTravel = () => {
 
     const [selectedView, setSelectedView] = useState('Overview');
+    const [allPackages, setAllPackages] = useState([]);
 
+    useEffect(() => {
+        axios.get('https://bongo-traveler.vercel.app/packages/all')
+            .then(res => {
+                setAllPackages(res?.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, []);
 
     return (
         <div className='md:w-[80%] mx-auto my-20 min-h-screen'>
@@ -60,7 +71,7 @@ const TourTravel = () => {
                 </div>
 
                 {selectedView === 'Overview' && <Overview />}
-                {selectedView === 'packages' && <Packages />}
+                {selectedView === 'packages' && <Packages allPackages={allPackages} />}
                 {selectedView === 'guides' && <MeetGuides />}
             </div>
 
