@@ -252,7 +252,7 @@ const Register = () => {
 
 
                                     <div className='flex justify-center'>
-                                        <button type='submit' className='bg-teal-500 text-white px-10 py-3 rounded-full'>Sign In</button>
+                                        <button type='submit' className='bg-teal-500 text-white px-10 py-3 rounded-full'>Sign Up</button>
                                     </div>
                                 </form>
                             )}
