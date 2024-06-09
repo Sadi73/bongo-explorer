@@ -8,18 +8,28 @@ const MyWishlist = () => {
     const { user } = useContext(AuthContext);
 
     const [myWishedData, setMyWishedData] = useState([]);
+    const [allPackages, setAllPackages] = useState([]);
 
     useEffect(() => {
+        axios.get(`https://bongo-traveler.vercel.app/packages/all`)
+            .then(res => setAllPackages(res?.data))
+            .catch(error => console.log(error))
+
         axios.get(`https://bongo-traveler.vercel.app/wishlist/all?email=${user?.email}`)
             .then(res => setMyWishedData(res?.data))
             .catch(error => console.log(error))
     }, []);
 
+
     return (
         <div className='mt-10'>
 
             {myWishedData.length > 0 ? myWishedData.map(item => <div key={item?._id} className='mb-5 shadow-xl'>
-                <PackageCard />
+                <PackageCard
+                    type='wishlist'
+                    packageInfo={item}
+                    packageDetails={allPackages?.find(eachPackage => eachPackage?.id == item?.packageId)}
+                />
             </div>) : <EmptyPage />}
 
         </div>

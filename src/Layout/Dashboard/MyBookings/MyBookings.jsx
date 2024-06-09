@@ -28,6 +28,7 @@ const MyBookings = () => {
                     className='mb-5'
                 >
                     <PackageCard
+                        type='bookings'
                         packageInfo={item}
                         packageDetails={allPackages?.find(eachPackage => eachPackage?.id == item?.package)}
                     />
