@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import image1 from '../../../assets/Package Image/1.jpg'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import EmptyPage from '../../Dashboard/EmptyPage/EmptyPage';
 
 const AllPackages = () => {
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams()
+
     const [AllPackagesList, setAllPackagesList] = useState([])
 
     useEffect(() => {
         axios.get('https://bongo-traveler.vercel.app/packages/all')
             .then(res => {
                 if (res?.data) {
+                    if (searchParams.get("type")) {
+                        const filteredData = res.data.filter(item => (item?.type).toLowerCase() === (searchParams.get("type").toLowerCase()));
+                        setAllPackagesList(filteredData);
+                        return
+                    }
                     setAllPackagesList(res?.data)
                 }
             })
@@ -24,21 +31,21 @@ const AllPackages = () => {
     return (
         <div>
             {AllPackagesList?.length > 0 ?
-                <div className='pt-20  md:w-[80%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10'>
+                <div className='pt-28  md:w-[80%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10'>
                     {AllPackagesList.map(eachPackage =>
                         <div
                             key={eachPackage?.id}
                             className='h-[500px] w-96 relative'
                             onClick={() => navigate(`/package/${eachPackage?.id}`)}
                         >
-                            <img src={image1} alt="" className='h-full hover:scale-110 transition-transform duration-300' />
+                            <img src={eachPackage?.imageURL} alt="" className='h-full hover:scale-110 transition-transform duration-300' />
 
                             <div className='absolute top-0 right-0 text-white text-xl font-bold p-3'>
-                                <p>$500</p>
+                                <p>${eachPackage?.price}</p>
                             </div>
 
                             <div className='absolute bottom-0 bg-black bg-opacity-50 text-white px-5 py-2'>
-                                <h1>Package Name</h1>
+                                <h1>{eachPackage?.title}</h1>
                                 <div className='flex items-center justify-between'>
                                     <p>9.5</p>
                                     <div>
@@ -46,7 +53,7 @@ const AllPackages = () => {
                                         <p>number of rating</p>
                                     </div>
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio ducimus exercitationem distinctio harum autem eos.</p>
+                                <p>{eachPackage?.description.slice(0, 100) + ' ... '}</p>
                             </div>
                         </div>
                     )}

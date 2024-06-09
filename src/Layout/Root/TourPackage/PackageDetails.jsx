@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import image1 from '../../../assets/Package Image/2.png';
 import image2 from '../../../assets/Package Image/3.png';
 import image3 from '../../../assets/Package Image/4.png';
@@ -11,6 +11,7 @@ import MeetGuides from '../Homepage/TourAndTravel/MeetGuides';
 import BookNowModal from './BookNowModal';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { UserContext } from '../../../Providers/UserInfoProvider';
 
 const images = [image1, image2, image3, image4, image5, image6, image7];
 
@@ -39,6 +40,8 @@ const items = [
 ];
 
 const PackageDetails = () => {
+    const { userDetails } = useContext(UserContext);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [packageDetails, setPackageDetails] = useState({});
 
@@ -65,11 +68,11 @@ const PackageDetails = () => {
                 />
             }
 
-            <div className='md:w-[80%] mx-auto pt-20 space-y-5'>
+            <div className='md:w-[80%] mx-auto pt-24 space-y-5'>
 
                 <div className='flex flex-col sm:flex-row justify-between items-center'>
                     <h1 className='text-3xl'>Package Details</h1>
-                    <button className='bg-teal-500 text-white px-5 py-3' onClick={() => setIsModalOpen(true)}>Book Now</button>
+                    {userDetails?.role !== 'ADMIN' && <button className='bg-teal-500 text-white px-5 py-3' onClick={() => setIsModalOpen(true)}>Book Now</button>}
                 </div>
 
                 <div className='gallery-container space-y-5'>

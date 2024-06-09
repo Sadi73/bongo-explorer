@@ -6,26 +6,31 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 
+import './TourType.css';
+
 // import required modules
 import { Navigation } from 'swiper/modules';
 import { GiHiking } from 'react-icons/gi';
+import { useNavigate } from 'react-router-dom';
 
 const types = [
-    { name: 'Hiking' },
-    { name: 'Sports' },
-    { name: 'Walking' },
-    { name: 'Wildings' },
-    { name: 'Air Rides' },
-    { name: 'Cycling' },
-    { name: 'Rafting' },
-    { name: 'Camping' },
-    { name: 'Museum' },
-    { name: 'Architecture' },
-    { name: 'Historical' },
-    { name: 'Fishing' },
+    { name: 'hiking' },
+    { name: 'sports' },
+    { name: 'walking' },
+    { name: 'wildings' },
+    { name: 'cycling' },
+    { name: 'rafting' },
+    { name: 'camping' },
+    { name: 'museum' },
+    { name: 'architecture' },
+    { name: 'historical' },
+    { name: 'fishing' },
 ];
 
 const TourType = () => {
+
+    const navigate = useNavigate();
+
     return (
         <div className='md:w-[80%] mx-auto space-y-2'>
             <p className='text-center'>Find Your Tour by</p>
@@ -47,7 +52,9 @@ const TourType = () => {
                             <SwiperSlide key={index}>
                                 <div
                                     style={{ width: '150px', height: '150px', border: '1px solid', borderRadius: '50%', }}
-                                    className='flex flex-col items-center justify-center space-y-3'>
+                                    className='flex flex-col items-center justify-center space-y-3 cursor-pointer'
+                                    onClick={() => navigate(`/package/all?type=${type?.name}`)}
+                                >
                                     <GiHiking className='text-5xl' />
                                     <p className='uppercase font-bold'>{type?.name}</p>
                                 </div>

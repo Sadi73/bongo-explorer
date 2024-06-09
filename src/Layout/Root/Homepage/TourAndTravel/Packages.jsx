@@ -80,7 +80,7 @@ const Packages = ({ allPackages }) => {
 
 
 
-    }
+    };
 
     return (
         <>
@@ -88,9 +88,9 @@ const Packages = ({ allPackages }) => {
                 <div>
                     <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-10 px-5 md:px-0'>
                         {slicedData.map(eachPackage =>
-                            <div key={eachPackage?.id} className='flex border gap-5 h-60 rounded-lg shadow-xl'>
-                                <div className='w-[60%] relative'>
-                                    <img src={image} alt="" className='w-full h-full rounded-lg' />
+                            <div key={eachPackage?.id} className='flex border gap-5 h-72 rounded-lg shadow-xl'>
+                                <div className='relative'>
+                                    <img src={eachPackage?.imageURL} alt="" className='w-[700px] h-full rounded-l-lg' />
 
                                     <div
                                         className='bg-white bg-opacity-50 px-3 py-2 absolute top-0 right-0 cursor-pointer'
@@ -100,12 +100,12 @@ const Packages = ({ allPackages }) => {
                                     </div>
                                 </div>
 
-                                <div className='flex flex-col p-3'>
+                                <div className='flex flex-col p-2'>
                                     <div className='flex-1'>
-                                        <h1>Package Name</h1>
-                                        <p>Bandorban</p>
+                                        <h1 className='text-xl font-bold'>{eachPackage?.title}</h1>
+                                        <p className='my-2'>{eachPackage?.type}</p>
                                         <hr />
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, quaerat?</p>
+                                        <p className='mt-5'>{eachPackage?.description.slice(0, 150) + ' ... read more'}</p>
                                     </div>
                                     <Link to={`/package/${eachPackage?.id}`}><button className='bg-teal-500 text-white p-2 w-full'>View Details</button></Link>
                                 </div>

@@ -34,15 +34,15 @@ const Navbar = () => {
     ];
 
     return (
-        <div className='navbar shadow-lg fixed bg-black bg-opacity-50 z-10 pr-20'>
+        <div className='navbar shadow-lg fixed bg-black bg-opacity-50 z-10 pr-10'>
             <div className='navbar-start'>
                 {/* ------------ FOR MOBILE SCREEN -------------- */}
                 <div className='md:hidden'>
                     <MenuBar />
                 </div>
 
-                <Link to="/"><button className='text-lg md:text-3xl font-medium text-[#FFF8DC] flex items-center'>
-                    <img src={logo} alt="" className='w-16'/> Bongo Explorer
+                <Link to="/"><button className='text-lg md:text-xl font-medium text-[#FFF8DC] flex items-center'>
+                    <img src={logo} alt="" className='w-20'/> Bongo <br/>Explorer
                 </button></Link>
             </div>
 
