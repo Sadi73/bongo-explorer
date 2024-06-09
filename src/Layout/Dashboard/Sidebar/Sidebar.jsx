@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { AppstoreOutlined, MailOutlined, SettingOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../../Providers/UserInfoProvider';
 
 const userItems = [
     {
@@ -75,9 +76,12 @@ const adminItems = [
     }
 ];
 
-const Sidebar = ({ userInfo }) => {
+const Sidebar = () => {
+    
+    const { userDetails, isLoading } = useContext(UserContext);
+
     const [current, setCurrent] = useState('1');
-    const role = userInfo?.[0]?.role;
+    const role = userDetails?.role;
 
     const onClick = (e) => {
         setCurrent(e.key);
