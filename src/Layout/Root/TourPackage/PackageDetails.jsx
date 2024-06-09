@@ -70,10 +70,17 @@ const PackageDetails = () => {
 
             <div className='md:w-[80%] mx-auto pt-24 space-y-5'>
 
-                <div className='flex flex-col sm:flex-row justify-between items-center'>
-                    <h1 className='text-3xl'>Package Details</h1>
+                <div className='flex flex-col  justify-center items-center space-y-5'>
+
+                    <div className='text-center leading-8'>
+                        <h1 className='text-3xl font-semibold'>{packageDetails?.title}</h1>
+                        <p>Type: {packageDetails?.type}</p>
+                        <p>Price: ${packageDetails?.price}</p>
+                    </div>
                     {userDetails?.role !== 'ADMIN' && <button className='bg-teal-500 text-white px-5 py-3' onClick={() => setIsModalOpen(true)}>Book Now</button>}
                 </div>
+
+
 
                 <div className='gallery-container space-y-5'>
                     <div className='row-1 grid grid-cols-1 md:grid-cols-2 gap-5'>

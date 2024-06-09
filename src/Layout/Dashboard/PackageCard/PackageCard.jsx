@@ -2,19 +2,21 @@ import React from 'react';
 import img from '../../../assets/hiking.jpg';
 import { Button } from 'antd';
 
-const PackageCard = ({packageInfo}) => {
+const PackageCard = ({ packageInfo, packageDetails }) => {
+
     return (
         <div className='flex gap-10 border shadow-xl rounded-lg p-5'>
             <div>
-                <img src={img} alt="" className='w-96 rounded-lg' />
+                <img src={packageDetails?.imageURL} alt="" className='w-96 h-64 rounded-lg' />
             </div>
 
-            <div className='w-[60%]'>
-                <h1>Package Name</h1>
-                <p>Guided By: </p>
-                <p>Price</p>
-                <p>Date:</p>
-                <p>Status</p>
+            <div className='w-[60%] leading-7'>
+                <h1><span className='font-bold'>Package Name:</span> {packageDetails?.title}</h1>
+                <p><span className='font-bold'>Description:</span> {packageDetails?.description}</p>
+                <p><span className='font-bold'>Guided By</span>: {packageInfo?.guide}</p>
+                <p><span className='font-bold'>Price:</span> ${packageInfo?.price}</p>
+                <p><span className='font-bold'>Date:</span> {packageInfo?.date}</p>
+                <p><span className='font-bold'>Status:</span> {packageInfo?.status}</p>
             </div>
 
             <div className='flex flex-col'>

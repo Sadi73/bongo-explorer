@@ -3,6 +3,7 @@ import image1 from '../../../assets/Package Image/1.jpg'
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import EmptyPage from '../../Dashboard/EmptyPage/EmptyPage';
+import { Rate } from 'antd';
 
 const AllPackages = () => {
     const navigate = useNavigate();
@@ -44,15 +45,9 @@ const AllPackages = () => {
                                 <p>${eachPackage?.price}</p>
                             </div>
 
-                            <div className='absolute bottom-0 bg-black bg-opacity-50 text-white px-5 py-2'>
+                            <div className='absolute bottom-0 bg-black bg-opacity-50 text-white px-5 py-2 space-y-2'>
                                 <h1>{eachPackage?.title}</h1>
-                                <div className='flex items-center justify-between'>
-                                    <p>9.5</p>
-                                    <div>
-                                        <p>Rating</p>
-                                        <p>number of rating</p>
-                                    </div>
-                                </div>
+                                <Rate allowHalf  disabled defaultValue={4.5} />
                                 <p>{eachPackage?.description.slice(0, 100) + ' ... '}</p>
                             </div>
                         </div>

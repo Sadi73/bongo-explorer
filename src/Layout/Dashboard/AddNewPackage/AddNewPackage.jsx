@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../../assets/background.png'
-import { Input } from 'antd';
+import { Input, Select, Spin } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import { Formik } from 'formik';
 import axios from 'axios';
@@ -9,15 +9,30 @@ import * as Yup from 'yup';
 import Swal from 'sweetalert2';
 const apiKey = import.meta.env.VITE_imageBBapiKey;
 
+const options = [
+    { value: 'hiking', label: 'Hiking' },
+    { value: 'sports', label: 'Sports' },
+    { value: 'walking', label: 'Walking' },
+    { value: 'wildings', label: 'Wildings' },
+    { value: 'rafting', label: 'Rafting' },
+    { value: 'cycling', label: 'Cycling' },
+    { value: 'camping', label: 'Camping' },
+    { value: 'museum', label: 'Museum' },
+    { value: 'architecture', label: 'Architecture' },
+    { value: 'historical', label: 'Historical' },
+    { value: 'fishing', label: 'Fishing' }
+];
+
 const AddNewPackage = () => {
     const navigate = useNavigate();
     const [selectedFile, setSelectedFile] = useState(null);
+    const [submitted, setSubmitted] = useState(false);
 
     const handleAddPackage = (packageData) => {
         if (!selectedFile) {
             Swal.fire({
                 position: "top-end",
-                title: "Please select a file first."
+                title: "Please Select an Image First."
             });
             return;
         };
@@ -31,6 +46,7 @@ const AddNewPackage = () => {
                     axios.post('https://bongo-traveler.vercel.app/packages/add', { ...packageData, imageURL: res?.data?.data?.url })
                         .then(res => {
                             if (res?.data) {
+                                setSubmitted(false);
                                 Swal.fire({
                                     position: "top-end",
                                     icon: "success",
@@ -63,7 +79,7 @@ const AddNewPackage = () => {
 
 
     return (
-        <div className='mt-5 min-h-[600px] py-5 bg-gradient-to-r from-teal-200 to-teal-500 flex items-center'>
+        <div className='mt-10 min-h-[600px] py-5 bg-gradient-to-r from-teal-200 to-teal-500 flex items-center'>
             <div className='w-1/2'></div>
             <div className='bg-orange-100 border border-orange-500 p-10 rounded-lg'>
 
@@ -72,11 +88,13 @@ const AddNewPackage = () => {
                     initialValues={{ title: '', type: '', price: '', description: '' }}
                     validationSchema={validationSchema}
                     onSubmit={(values, { setSubmitting }) => {
+                        setSubmitted(true);
                         handleAddPackage(values);
                     }}
                 >
                     {({
                         values,
+                        setValues,
                         errors,
                         touched,
                         handleChange,
@@ -93,21 +111,22 @@ const AddNewPackage = () => {
                                     value={values?.title}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    placeholder="Filled"
+                                    placeholder="Enter Package Title"
                                     className={`py-3 ${(touched?.title && errors?.title) ? 'border-2 border-red-500' : ''}`}
                                 />
                             </div>
+
                             <div>
                                 <label htmlFor="">Package Type</label>
-                                <Input
+                                <Select
                                     name='type'
-                                    value={values?.type}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    placeholder="Filled"
-                                    className={`py-3 ${(touched?.type && errors?.type) ? 'border-2 border-red-500' : ''}`}
+                                    placeholder="Select Type"
+                                    onChange={(value) => setValues({ ...values, type: value })}
+                                    options={options}
+                                    className={`w-full ${(touched?.type && errors?.type) ? 'border-2 border-red-500' : ''}`}
                                 />
                             </div>
+
                             <div>
                                 <label htmlFor="">Price</label>
                                 <Input
@@ -115,10 +134,11 @@ const AddNewPackage = () => {
                                     value={values?.price}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    placeholder="Filled"
+                                    placeholder="Enter Package Price"
                                     className={`py-3 ${(touched?.price && errors?.price) ? 'border-2 border-red-500' : ''}`}
                                 />
                             </div>
+
                             <div>
                                 <label htmlFor="">Package Description</label>
                                 <TextArea
@@ -127,16 +147,19 @@ const AddNewPackage = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     rows={4}
-                                    placeholder="Enter the package description"
+                                    placeholder="Enter Package Description"
                                     className={`py-3 ${(touched?.description && errors?.description) ? 'border-2 border-red-500' : ''}`} />
                             </div>
+
                             <div>
                                 <label htmlFor="">Upload Image</label>
                                 <input type="file"
                                     name="" id="" onChange={(e) => handleFileChange(e)} />
                             </div>
 
-                            <button type='submit' className='bg-orange-300 py-3 w-full'>ADD</button>
+                            {submitted ? <Spin /> : <button type='submit' className='bg-orange-300 py-3 w-full'>ADD</button>}
+
+
                         </form>
                     )}
                 </Formik>

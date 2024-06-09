@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import { DatePicker, Input, Modal, Select } from 'antd';
+import React, { useContext, useState } from 'react';
+import { DatePicker, Input, Modal, Select, Spin } from 'antd';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const options = [
     {
@@ -24,7 +25,11 @@ const options = [
 const BookNowModal = ({ isModalOpen, setIsModalOpen }) => {
 
     const { user } = useContext(AuthContext);
+    
     const params = useParams();
+    const navigate = useNavigate();
+
+    const [submitted, setSubmitted] = useState(false);
 
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -62,11 +67,22 @@ const BookNowModal = ({ isModalOpen, setIsModalOpen }) => {
                     }}
                     validationSchema={validationSchema}
                     onSubmit={(values, { setSubmitting }) => {
-                        console.log(values);
-
-                        axios.post('https://bongo-traveler.vercel.app/book-package', {...values, package: params?.packageId})
+                        setSubmitted(true);
+                        axios.post('https://bongo-traveler.vercel.app/book-package', { ...values, package: params?.packageId })
                             .then(res => {
-                                console.log(res)
+                                if (res?.data) {
+                                    setSubmitted(false);
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: "You have booked this package",
+                                        showConfirmButton: false,
+                                        timer: 1500,
+                                        didClose: () => {
+                                            navigate('/dashboard/my-bookings');
+                                        }
+                                    });
+                                }
                             })
                             .catch(error => {
                                 console.log(error)
@@ -175,7 +191,7 @@ const BookNowModal = ({ isModalOpen, setIsModalOpen }) => {
                                 {(touched?.guide && errors?.guide) && <p className='text-red-500 text-end'>{errors?.guide}</p>}
                             </div>
 
-                            <button type='submit' className='bg-teal-500 py-3 text-white w-full'>Confirm Book</button>
+                            {submitted ? <Spin /> : <button type='submit' className='bg-teal-500 py-3 text-white w-full'>Confirm Book</button>}
                         </form>
                     )}
                 </Formik>

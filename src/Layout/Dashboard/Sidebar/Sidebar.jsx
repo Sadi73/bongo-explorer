@@ -77,7 +77,7 @@ const adminItems = [
 ];
 
 const Sidebar = () => {
-    
+
     const { userDetails, isLoading } = useContext(UserContext);
 
     const [current, setCurrent] = useState('1');
@@ -89,7 +89,9 @@ const Sidebar = () => {
 
     return (
         <div className='menu-container h-screen' >
-            <Link to='/'> <ArrowLeftOutlined /> Back To Home</Link>
+            <div className='my-2 pl-5 text-xl font-bold'>
+                <Link to='/'> <ArrowLeftOutlined /> Back To Home</Link>
+            </div>
             <Menu
                 theme={'dark'}
                 onClick={onClick}
