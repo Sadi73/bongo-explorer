@@ -1,6 +1,4 @@
 import React from 'react';
-import travelImage from '../../../../assets/hiking.jpg'
-import ReactPlayer from 'react-player';
 
 const Overview = () => {
     return (

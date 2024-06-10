@@ -6,7 +6,7 @@ const AllStories = () => {
     const [allStories, setAllStories] = useState([])
 
     useEffect(() => {
-        axios.get('http://localhost:5000/stories')
+        axios.get('https://bongo-traveler.vercel.app/stories')
             .then(res => setAllStories(res?.data))
             .catch(error => console.log(error))
     }, []);
