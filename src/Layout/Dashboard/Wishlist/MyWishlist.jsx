@@ -9,6 +9,7 @@ const MyWishlist = () => {
 
     const [myWishedData, setMyWishedData] = useState([]);
     const [allPackages, setAllPackages] = useState([]);
+    const [reload, setReload] = useState(false);
 
     useEffect(() => {
         axios.get(`https://bongo-traveler.vercel.app/packages/all`)
@@ -18,7 +19,7 @@ const MyWishlist = () => {
         axios.get(`https://bongo-traveler.vercel.app/wishlist/all?email=${user?.email}`)
             .then(res => setMyWishedData(res?.data))
             .catch(error => console.log(error))
-    }, []);
+    }, [reload]);
 
 
     return (
@@ -29,6 +30,8 @@ const MyWishlist = () => {
                     type='wishlist'
                     packageInfo={item}
                     packageDetails={allPackages?.find(eachPackage => eachPackage?.id == item?.packageId)}
+                    reload={reload}
+                    setReload={setReload}
                 />
             </div>) : <EmptyPage />}
 

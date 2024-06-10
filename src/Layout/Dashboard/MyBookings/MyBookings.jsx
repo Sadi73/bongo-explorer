@@ -9,6 +9,7 @@ const MyBookings = () => {
 
     const [myBookedData, setMyBookedData] = useState([]);
     const [allPackages, setAllPackages] = useState([]);
+    const [reload, setReload] = useState(false);
 
     useEffect(() => {
 
@@ -19,7 +20,7 @@ const MyBookings = () => {
         axios.get(`https://bongo-traveler.vercel.app/booked-packages/all?email=${user?.email}`)
             .then(res => setMyBookedData(res?.data))
             .catch(error => console.log(error))
-    }, []);
+    }, [reload]);
 
     return (
         <div className='mt-10'>
@@ -31,6 +32,8 @@ const MyBookings = () => {
                         type='bookings'
                         packageInfo={item}
                         packageDetails={allPackages?.find(eachPackage => eachPackage?.id == item?.package)}
+                        reload={reload}
+                        setReload={setReload}
                     />
                 </div>) :
                 <EmptyPage />
