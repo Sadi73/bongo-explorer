@@ -7,7 +7,7 @@ const PackageCard = ({ type, packageInfo, packageDetails, reload, setReload }) =
     const navigate = useNavigate();
 
     const handleCancelBooking = (id) => {
-        axios.delete(`http://localhost:5000/booked-package/delete/${id}`)
+        axios.delete(`https://bongo-traveler.vercel.app/booked-package/delete/${id}`)
             .then(res => {
                 if (res?.data) {
                     setReload(!reload)
@@ -17,7 +17,7 @@ const PackageCard = ({ type, packageInfo, packageDetails, reload, setReload }) =
     }
 
     const handleRemoveFromWishlist = (id) => {
-        axios.delete(`http://localhost:5000/wishlist/delete/${id}`)
+        axios.delete(`https://bongo-traveler.vercel.app/wishlist/delete/${id}`)
             .then(res => {
                 if (res?.data) {
                     setReload(!reload)

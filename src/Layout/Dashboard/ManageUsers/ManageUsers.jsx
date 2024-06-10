@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import EmptyPage from '../EmptyPage/EmptyPage';
 
 const ManageUsers = () => {
 
@@ -33,7 +34,7 @@ const ManageUsers = () => {
 
     return (
         <div className='mt-10'>
-            {allRequest.map(request =>
+            {allRequest.length > 0 ? allRequest.map(request =>
                 <div key={request?._id}
                     className='flex justify-between items-center border rounded-lg p-5 shadow-lg'
                 >
@@ -52,7 +53,7 @@ const ManageUsers = () => {
                         >Approve</button>
                     </div>
                 </div>
-            )}
+            ) : <EmptyPage message='No request Found'/>}
         </div>
     );
 };

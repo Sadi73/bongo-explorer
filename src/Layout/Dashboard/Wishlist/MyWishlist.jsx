@@ -33,7 +33,7 @@ const MyWishlist = () => {
                     reload={reload}
                     setReload={setReload}
                 />
-            </div>) : <EmptyPage />}
+            </div>) : <EmptyPage message='You have No Packages Saved'/>}
 
         </div>
     );

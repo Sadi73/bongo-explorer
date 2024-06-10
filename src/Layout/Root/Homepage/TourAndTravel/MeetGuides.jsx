@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -17,16 +17,26 @@ import person5 from '../../../../assets/person5.jpg'
 import person6 from '../../../../assets/person6.jpeg'
 import person7 from '../../../../assets/person7.jpg'
 import person8 from '../../../../assets/person8.jpg'
+import axios from 'axios';
 
 const MeetGuides = () => {
+
+    // useEffect(() => {
+    //     axios.get('https://bongo-traveler.vercel.app/guides/all')
+    //         .then(res => {
+    //             console.log(res?.data)
+    //         })
+    //         .catch(error => console.log(error))
+    // }, [])
+
     return (
         <div className='p-10 space-y-10 '>
             {/* <h1 className='text-center text-5xl'>Our Experts</h1> */}
 
             <Swiper
-                 slidesPerView={6}
-                 spaceBetween={30}
-                 grabCursor={true}
+                slidesPerView={6}
+                spaceBetween={30}
+                grabCursor={true}
                 pagination={{
                     clickable: true,
                 }}

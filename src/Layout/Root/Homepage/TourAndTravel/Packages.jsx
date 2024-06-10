@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import image from '../../../../assets/hiking.jpg'
 import { Link } from 'react-router-dom';
 import { FaRegHeart } from 'react-icons/fa';
 import { AuthContext } from '../../../../Providers/AuthProvider';
@@ -86,9 +85,9 @@ const Packages = ({ allPackages }) => {
         <>
             {allPackages?.length > 0 ?
                 <div>
-                    <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-10 px-5 md:px-0'>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10 px-5 lg:px-0'>
                         {slicedData.map(eachPackage =>
-                            <div key={eachPackage?.id} className='flex border gap-5 h-72 rounded-lg shadow-xl'>
+                            <div key={eachPackage?.id} className='flex border gap-5 min-h-72 rounded-lg shadow-xl'>
                                 <div className='relative'>
                                     <img src={eachPackage?.imageURL} alt="" className='w-[700px] h-full rounded-l-lg' />
 

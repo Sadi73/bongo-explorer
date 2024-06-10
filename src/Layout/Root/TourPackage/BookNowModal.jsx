@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { DatePicker, Input, Modal, Select, Spin } from 'antd';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -6,21 +6,6 @@ import { AuthContext } from '../../../Providers/AuthProvider';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
-const options = [
-    {
-        value: 'jack',
-        label: 'Jack',
-    },
-    {
-        value: 'lucy',
-        label: 'Lucy',
-    },
-    {
-        value: 'tom',
-        label: 'Tom',
-    },
-]
 
 const BookNowModal = ({ isModalOpen, setIsModalOpen }) => {
 
@@ -30,6 +15,7 @@ const BookNowModal = ({ isModalOpen, setIsModalOpen }) => {
     const navigate = useNavigate();
 
     const [submitted, setSubmitted] = useState(false);
+    const [guideOptions, setGuideOptions] = useState([]);
 
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -47,6 +33,23 @@ const BookNowModal = ({ isModalOpen, setIsModalOpen }) => {
         date: Yup.string().required('Date is required'),
         guide: Yup.string().required('Select a Guide'),
     });
+
+
+    useEffect(() => {
+        axios.get('https://bongo-traveler.vercel.app/guides/all')
+            .then(res => {
+                const dummyOptions = [];
+                res?.data.map(item => {
+                    const temp = {};
+                    temp.value = item?.email;
+                    temp.label = item?.name;
+                    dummyOptions.push(temp)
+                });
+                setGuideOptions(dummyOptions)
+            })
+            .catch(error => console.log(error))
+    }, [])
+
 
     return (
         <>
@@ -185,7 +188,7 @@ const BookNowModal = ({ isModalOpen, setIsModalOpen }) => {
                                     optionFilterProp="children"
                                     onChange={(e) => setValues({ ...values, guide: e })}
                                     filterOption={filterOption}
-                                    options={options}
+                                    options={guideOptions}
                                     className='w-2/3'
                                 />
                                 {(touched?.guide && errors?.guide) && <p className='text-red-500 text-end'>{errors?.guide}</p>}

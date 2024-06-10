@@ -47,7 +47,7 @@ const AllPackages = () => {
 
                             <div className='absolute bottom-0 bg-black bg-opacity-50 text-white px-5 py-2 space-y-2'>
                                 <h1>{eachPackage?.title}</h1>
-                                <Rate allowHalf  disabled defaultValue={4.5} />
+                                <Rate allowHalf disabled defaultValue={4.5} />
                                 <p>{eachPackage?.description.slice(0, 100) + ' ... '}</p>
                             </div>
                         </div>
