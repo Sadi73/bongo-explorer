@@ -82,9 +82,11 @@ const Packages = ({ allPackages }) => {
     };
 
     return (
-        <>
+        <div className='my-10'>
             {allPackages?.length > 0 ?
                 <div>
+                    <h1 className='text-3xl font-semibold text-center'>Our Packages</h1>
+
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10 px-5 lg:px-0'>
                         {slicedData.map(eachPackage =>
                             <div key={eachPackage?.id} className='flex border gap-5 min-h-72 rounded-lg shadow-xl'>
@@ -123,7 +125,7 @@ const Packages = ({ allPackages }) => {
                     linkMessage={false}
                 />
             }
-        </>
+        </div>
     );
 };
 

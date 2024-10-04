@@ -31,7 +31,7 @@ const MeetGuides = () => {
 
     return (
         <div className='p-10 space-y-10 '>
-            {/* <h1 className='text-center text-5xl'>Our Experts</h1> */}
+            <h1 className='text-center text-5xl'>Our Guides</h1>
 
             <Swiper
                 slidesPerView={6}
