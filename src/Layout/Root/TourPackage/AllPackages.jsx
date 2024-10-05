@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import image1 from '../../../assets/Package Image/1.jpg'
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import EmptyPage from '../../Dashboard/EmptyPage/EmptyPage';
 import { Rate } from 'antd';
+import { RiseLoader } from 'react-spinners';
 
 const AllPackages = () => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams()
 
-    const [AllPackagesList, setAllPackagesList] = useState([])
+    const [AllPackagesList, setAllPackagesList] = useState([]);
+    const [loaderVisible, setLoaderVisible] = useState(true);
 
     useEffect(() => {
         axios.get('https://bongo-traveler.vercel.app/packages/all')
             .then(res => {
+                setLoaderVisible(false);
                 if (res?.data) {
                     if (searchParams.get("type")) {
                         const filteredData = res.data.filter(item => (item?.type).toLowerCase() === (searchParams.get("type").toLowerCase()));
@@ -28,6 +30,13 @@ const AllPackages = () => {
             })
     }, []);
 
+    if (loaderVisible) {
+        return (
+            <div className='flex justify-center items-center h-screen'>
+                <RiseLoader color="#36d7b7" />
+            </div>
+        );
+    };
 
     return (
         <div className='pt-28 md:w-[80%] mx-auto'>
