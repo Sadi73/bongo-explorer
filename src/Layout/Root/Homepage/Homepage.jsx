@@ -15,7 +15,7 @@ const Homepage = () => {
         <div className='space-y-10'>
             <Banner />
 
-            <div className='w-[80%] mx-auto space-y-32'>
+            <div className='md:w-[80%] mx-auto space-y-32'>
                 <Overview />
 
                 <VideoSection />

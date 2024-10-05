@@ -8,7 +8,7 @@ const Overview = () => {
                 title='Overview'
                 subTitle='Why Choose Bongo Explorer'
             />
-            <p>Welcome to our travel haven! Discover the breathtaking beauty of Bangladesh, where lush landscapes, vibrant cultures, and unforgettable experiences await. Let us help you plan your next adventure!</p>
+            <p className='px-2'>Welcome to our travel haven! Discover the breathtaking beauty of Bangladesh, where lush landscapes, vibrant cultures, and unforgettable experiences await. Let us help you plan your next adventure!</p>
         </div>
     );
 };

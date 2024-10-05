@@ -35,14 +35,14 @@ const Navbar = () => {
 
     return (
         <div className='navbar shadow-lg fixed bg-black bg-opacity-50 z-10 pr-10'>
-            <div className='navbar-start'>
+            <div className='navbar-start pl-3 md:pl-0'>
                 {/* ------------ FOR MOBILE SCREEN -------------- */}
                 <div className='md:hidden'>
                     <MenuBar />
                 </div>
 
                 <Link to="/"><button className='text-lg md:text-xl font-medium text-[#FFF8DC] flex items-center'>
-                    <img src={logo} alt="" className='w-16'/> Bongo Explorer
+                    <img src={logo} alt="" className='w-16 hidden md:block'/> Bongo Explorer
                 </button></Link>
             </div>
 

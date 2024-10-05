@@ -6,7 +6,7 @@ const Banner = () => (
         <div className="relative w-full h-screen">
             <img src={img1} className="w-full h-full object-cover" alt="gradient overlay image" />
             <div className="absolute inset-0 bg-black/50 flex justify-center items-center">
-                <span className="text-white/80 text-7xl font-serif text-center">
+                <span className="text-white/80 text-4xl md:text-7xl font-serif text-center">
                     Experience the Serenity of Bangladesh
                 </span>
             </div>
