@@ -36,7 +36,7 @@ const AllPackages = () => {
                     {AllPackagesList.map(eachPackage =>
                         <div
                             key={eachPackage?.id}
-                            className='h-[500px] w-96 relative'
+                            className='h-[500px] w-96 relative overflow-hidden'
                             onClick={() => navigate(`/package/${eachPackage?.id}`)}
                         >
                             <img src={eachPackage?.imageURL} alt="" className='h-full hover:scale-110 transition-transform duration-300' />

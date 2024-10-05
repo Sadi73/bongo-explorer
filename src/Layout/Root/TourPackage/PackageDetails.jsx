@@ -7,7 +7,7 @@ import image5 from '../../../assets/Package Image/6.png';
 import image6 from '../../../assets/Package Image/7.png';
 import image7 from '../../../assets/Package Image/8.png';
 import { Collapse } from 'antd';
-import MeetGuides from '../Homepage/TourAndTravel/MeetGuides';
+import MeetGuides from '../Homepage/MeetGuides';
 import BookNowModal from './BookNowModal';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';

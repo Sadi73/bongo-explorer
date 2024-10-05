@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaRegHeart } from 'react-icons/fa';
-import { AuthContext } from '../../../../Providers/AuthProvider';
+import { AuthContext } from '../../../Providers/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import EmptyPage from '../../../Dashboard/EmptyPage/EmptyPage';
-import Heading from '../../../../Components/Heading';
+import EmptyPage from '../../Dashboard/EmptyPage/EmptyPage';
+import Heading from '../../../Components/Heading';
 
-const Packages = ({ allPackages }) => {
+const Packages = () => {
 
     const { user } = useContext(AuthContext);
+    const [allPackages, setAllPackages] = useState([]);
 
     const slicedData = allPackages.slice(0, 4);
 
@@ -82,16 +83,27 @@ const Packages = ({ allPackages }) => {
 
     };
 
+    
+    useEffect(() => {
+        axios.get('https://bongo-traveler.vercel.app/packages/all')
+            .then(res => {
+                setAllPackages(res?.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, []);
+
     return (
-        <div className='my-10'>
+        <div className=''>
             {allPackages?.length > 0 ?
-                <div>
+                <div className='space-y-10'>
                     <Heading
-                        title='Our Packages'
+                        title='Popular Packages'
                         subTitle='Find your dream destination'
                     />
 
-                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10 px-5 lg:px-0'>
+                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 px-5 lg:px-0'>
                         {slicedData.map(eachPackage =>
                             <div key={eachPackage?.id} className='flex border gap-5 min-h-72 rounded-lg shadow-xl'>
                                 <div className='relative'>
@@ -120,7 +132,7 @@ const Packages = ({ allPackages }) => {
 
                     </div>
 
-                    <div className='flex justify-center mt-10'>
+                    <div className='flex justify-center'>
                         <Link to='/package/all'><button className='bg-teal-500 p-3 text-white'>View All Packages</button></Link>
                     </div>
                 </div> :

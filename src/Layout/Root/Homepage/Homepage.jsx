@@ -1,19 +1,35 @@
 import React from 'react';
-import Banner from './Banner/Banner';
-import TourTravel from './TourAndTravel/TourTravel';
+import Banner from './Banner';
 import TourType from './TourType/TourType';
 import Stories from './Stories/Stories';
+import CarouselSection from './CarouselSection';
+import Overview from './Overview';
+import VideoSection from './VideoSection';
+import MeetGuides from './MeetGuides';
+import Packages from './Packages';
 
 const Homepage = () => {
+
+
     return (
-        <div>
+        <div className='space-y-10'>
             <Banner />
 
-            <TourTravel />
+            <div className='w-[80%] mx-auto space-y-32'>
+                <Overview />
 
-            <TourType />
+                <CarouselSection />
 
-            <Stories />
+                <VideoSection />
+
+                <Packages />
+
+                <MeetGuides />
+
+                <TourType />
+
+                <Stories />
+            </div>
 
         </div>
     );

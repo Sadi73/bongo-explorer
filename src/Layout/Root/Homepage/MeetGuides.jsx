@@ -9,16 +9,16 @@ import 'swiper/css/pagination';
 // import required modules
 import { Pagination } from 'swiper/modules';
 
-import person1 from '../../../../assets/person1.jpeg'
-import person2 from '../../../../assets/person2.jpeg'
-import person3 from '../../../../assets/person3.jpg'
-import person4 from '../../../../assets/person4.jpg'
-import person5 from '../../../../assets/person5.jpg'
-import person6 from '../../../../assets/person6.jpeg'
-import person7 from '../../../../assets/person7.jpg'
-import person8 from '../../../../assets/person8.jpg'
+import person1 from '../../../assets/person1.jpeg'
+import person2 from '../../../assets/person2.jpeg'
+import person3 from '../../../assets/person3.jpg'
+import person4 from '../../../assets/person4.jpg'
+import person5 from '../../../assets/person5.jpg'
+import person6 from '../../../assets/person6.jpeg'
+import person7 from '../../../assets/person7.jpg'
+import person8 from '../../../assets/person8.jpg'
 import axios from 'axios';
-import Heading from '../../../../Components/Heading';
+import Heading from '../../../Components/Heading';
 
 const MeetGuides = () => {
 
@@ -31,7 +31,7 @@ const MeetGuides = () => {
     // }, [])
 
     return (
-        <div className='p-10 space-y-10 '>
+        <div className='space-y-10'>
             <Heading
                 title='Our Guides'
                 subTitle='Meet Some Awesome People'

@@ -14,7 +14,7 @@ const Stories = () => {
     }, [])
 
     return (
-        <div className='w-[80%] mx-auto my-20 space-y-5'>
+        <div className='space-y-10'>
             <Heading
                 title='Traveler Story'
                 subTitle='See the journey of our customer'

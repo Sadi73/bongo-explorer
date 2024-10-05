@@ -97,7 +97,7 @@ const Login = () => {
 
     return (
         <div className='md:pt-20'>
-            <div className='flex border mt-5 w-[80%] mx-auto min-h-[550px] rounded-lg mt-20'>
+            <div className='flex border w-[80%] mx-auto min-h-[550px] rounded-lg mt-20'>
                 <div className='flex items-center justify-center grow'>
                     <div className='space-y-5'>
                         <h1 className='text-center text-3xl text-teal-500 font-semibold'>Sign In to Bongo Explorers</h1>
