@@ -20,10 +20,10 @@ const Stories = () => {
                 subTitle='See The Journey Of Our Explorers'
             />
 
-            <div className="container grid grid-cols-4">
+            <div className="container grid grid-cols-2 md:grid-cols-4 gap-2">
                 {allStories.slice(0, 8).map((story, index) => (
                     <div className="image-card" key={index}>
-                        <img src={story?.tour_image} alt={`Image ${index + 1}`} />
+                        <img src={story?.tour_image} alt={`Image ${index + 1}`} className='rounded-lg' />
                         <div className="overlay">{story.name}</div>
                     </div>
                 ))}

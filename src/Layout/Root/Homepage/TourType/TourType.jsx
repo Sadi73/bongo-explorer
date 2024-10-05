@@ -1,31 +1,22 @@
 import React from 'react';
-// Import Swiper React components
-import { Swiper, SwiperSlide } from 'swiper/react';
-
-// Import Swiper styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-
-import './TourType.css';
-
-// import required modules
-import { Navigation } from 'swiper/modules';
-import { GiHiking } from 'react-icons/gi';
+import { GiBoatFishing, GiCampingTent, GiHiking, GiSmallFishingSailboat, GiWildfires } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
 import Heading from '../../../../Components/Heading';
+import { LiaBicycleSolid } from 'react-icons/lia';
+import { FaPersonWalking } from 'react-icons/fa6';
+import { MdArchitecture, MdMuseum, MdSportsBaseball } from 'react-icons/md';
 
 const types = [
-    { name: 'hiking' },
-    { name: 'sports' },
-    { name: 'walking' },
-    { name: 'wildings' },
-    { name: 'cycling' },
-    { name: 'rafting' },
-    { name: 'camping' },
-    { name: 'museum' },
-    { name: 'architecture' },
-    { name: 'historical' },
-    { name: 'fishing' },
+    { name: 'hiking', icon: <GiHiking className='text-5xl' /> },
+    { name: 'sports', icon: <MdSportsBaseball className='text-5xl' /> },
+    { name: 'walking', icon: <FaPersonWalking className='text-5xl' /> },
+    { name: 'wildings', icon: <GiWildfires className='text-5xl' /> },
+    { name: 'cycling', icon: <LiaBicycleSolid className='text-5xl' /> },
+    { name: 'rafting', icon: <GiSmallFishingSailboat className='text-5xl' /> },
+    { name: 'camping', icon: <GiCampingTent className='text-5xl' /> },
+    { name: 'museum', icon: <MdMuseum className='text-5xl' /> },
+    { name: 'architecture', icon: <MdArchitecture className='text-5xl' /> },
+    { name: 'fishing', icon: <GiBoatFishing className='text-5xl' /> },
 ];
 
 const TourType = () => {
@@ -40,31 +31,18 @@ const TourType = () => {
                 subTitle='Find Your Tour By'
             />
 
-            <Swiper
-                slidesPerView={6}
-                spaceBetween={100}
-                navigation={true}
-                modules={[Navigation]}
-                className="mySwiper"
-                style={{ padding: '0 5.5rem 0 2.5rem ' }}
-            >
-                {
-                    types.map((type, index) =>
-                        <SwiperSlide key={index}>
-                            <div
-                                style={{ width: '150px', height: '150px', border: '1px solid', borderRadius: '50%', }}
-                                className='flex flex-col items-center justify-center space-y-3 cursor-pointer'
-                                onClick={() => navigate(`/package/all?type=${type?.name}`)}
-                            >
-                                <GiHiking className='text-5xl' />
-                                <p className='uppercase font-bold'>{type?.name}</p>
-                            </div>
-                        </SwiperSlide>
-                    )
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-5'>
+                {types?.map((type, index) =>
+                    <div
+                        key={index}
+                        className='flex items-center justify-center gap-5 border px-5 py-3 rounded-lg cursor-pointer hover:shadow-lg'
+                        onClick={() => navigate(`/package/all?type=${type?.name}`)}
+                    >
+                        {type?.icon}
+                        <p className='uppercase font-bold'>{type?.name}</p>
+                    </div>)
                 }
-
-
-            </Swiper>
+            </div>
 
         </div>
     );

@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 // import required modules
-import { Pagination } from 'swiper/modules';
+import { EffectCoverflow, Pagination } from 'swiper/modules';
 
 import person1 from '../../../assets/person1.jpeg'
 import person2 from '../../../assets/person2.jpeg'
@@ -38,40 +38,45 @@ const MeetGuides = () => {
             />
 
             <Swiper
-                slidesPerView={6}
-                spaceBetween={30}
+                effect={'coverflow'}
                 grabCursor={true}
-                pagination={{
-                    clickable: true,
+                centeredSlides={true}
+                slidesPerView={3}
+                coverflowEffect={{
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows: true,
                 }}
-                modules={[Pagination]}
+                pagination={true}
+                modules={[EffectCoverflow, Pagination]}
                 className="mySwiper"
             >
                 <SwiperSlide>
-                    <img src={person1} alt="" className='h-60' />
+                    <img src={person1} alt="" className='h-72' />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={person2} alt="" className='h-60' />
+                    <img src={person2} alt="" className='h-72' />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={person3} alt="" className='h-60' />
+                    <img src={person3} alt="" className='h-72' />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={person4} alt="" className='h-60' />
+                    <img src={person4} alt="" className='h-72' />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={person5} alt="" className='h-60' />
+                    <img src={person5} alt="" className='h-72' />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={person6} alt="" className='h-60' />
+                    <img src={person6} alt="" className='h-72' />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={person7} alt="" className='h-60' />
+                    <img src={person7} alt="" className='h-72' />
                 </SwiperSlide>
                 <SwiperSlide>
-                    <img src={person8} alt="" className='h-60' />
+                    <img src={person8} alt="" className='h-72' />
                 </SwiperSlide>
-
             </Swiper>
 
         </div>
