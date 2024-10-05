@@ -90,14 +90,14 @@ const Login = () => {
             })
             .catch(error => {
                 setLoginError(true);
-                console.log('error: ',error)
+                console.log('error: ', error)
             })
     };
 
 
     return (
-        <div className='md:pt-20'>
-            <div className='flex border w-[80%] mx-auto min-h-[550px] rounded-lg mt-20'>
+        <div className='pt-28 px-5 md:px-0'>
+            <div className='flex flex-col-reverse md:flex-row border md:w-[80%] mx-auto min-h-[550px] rounded-lg gap-10 md:gap-0 pb-5 md:pb-0'>
                 <div className='flex items-center justify-center grow'>
                     <div className='space-y-5'>
                         <h1 className='text-center text-3xl text-teal-500 font-semibold'>Sign In to Bongo Explorers</h1>
@@ -113,75 +113,77 @@ const Login = () => {
 
                         {loginError && <p className='text-red-500'>Wrong Email or Password</p>}
 
-                        <Formik
-                            initialValues={{ email: '', password: '' }}
-                            validationSchema={validationSchema}
-                            onSubmit={(values, { setSubmitting }) => {
-                                handleLogIn(values?.email, values?.password)
-                            }}
-                        >
-                            {({
-                                values,
-                                errors,
-                                touched,
-                                handleChange,
-                                handleBlur,
-                                handleSubmit,
-                                isSubmitting,
-                                /* and other goodies */
-                            }) => (
-                                <form
-                                    onSubmit={handleSubmit}
-                                    className='space-y-5'
-                                >
-                                    <Input
-                                        name='email'
-                                        className={`py-3 ${(touched?.email && errors?.email) ? 'border-2 border-red-500' : ''}`}
-                                        placeholder="Email"
-                                        value={values?.email}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        prefix={
-                                            <MailOutlined
-                                                style={{
-                                                    color: 'rgba(0,0,0,.25)',
-                                                }}
-                                            />
-                                        }
-                                    />
-                                    {(touched?.email && errors?.email) && <p className='text-red-500'>{errors.email}</p>}
+                        <div className='px-5 md:px-0'>
+                            <Formik
+                                initialValues={{ email: '', password: '' }}
+                                validationSchema={validationSchema}
+                                onSubmit={(values, { setSubmitting }) => {
+                                    handleLogIn(values?.email, values?.password)
+                                }}
+                            >
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    handleChange,
+                                    handleBlur,
+                                    handleSubmit,
+                                    isSubmitting,
+                                    /* and other goodies */
+                                }) => (
+                                    <form
+                                        onSubmit={handleSubmit}
+                                        className='space-y-5'
+                                    >
+                                        <Input
+                                            name='email'
+                                            className={`py-3 ${(touched?.email && errors?.email) ? 'border-2 border-red-500' : ''}`}
+                                            placeholder="Email"
+                                            value={values?.email}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            prefix={
+                                                <MailOutlined
+                                                    style={{
+                                                        color: 'rgba(0,0,0,.25)',
+                                                    }}
+                                                />
+                                            }
+                                        />
+                                        {(touched?.email && errors?.email) && <p className='text-red-500'>{errors.email}</p>}
 
 
-                                    <Input.Password
-                                        name='password'
-                                        className={`py-3 ${(touched?.password && errors?.password) ? 'border-2 border-red-500' : ''}`}
-                                        placeholder="Password"
-                                        value={values?.password}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        prefix={
-                                            <LockOutlined
-                                                style={{
-                                                    color: 'rgba(0,0,0,.25)',
-                                                }}
-                                            />
-                                        }
+                                        <Input.Password
+                                            name='password'
+                                            className={`py-3 ${(touched?.password && errors?.password) ? 'border-2 border-red-500' : ''}`}
+                                            placeholder="Password"
+                                            value={values?.password}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            prefix={
+                                                <LockOutlined
+                                                    style={{
+                                                        color: 'rgba(0,0,0,.25)',
+                                                    }}
+                                                />
+                                            }
 
-                                    />
-                                    {(touched?.password && errors?.password) && <p className='text-red-500'>{errors.password}</p>}
+                                        />
+                                        {(touched?.password && errors?.password) && <p className='text-red-500'>{errors.password}</p>}
 
 
-                                    <div className='flex justify-center'>
-                                        <button type='submit' className='bg-teal-500 text-white px-10 py-3 rounded-full'>Sign In</button>
-                                    </div>
-                                </form>
-                            )}
-                        </Formik>
+                                        <div className='flex justify-center'>
+                                            <button type='submit' className='bg-teal-500 text-white px-10 py-3 rounded-full'>Sign In</button>
+                                        </div>
+                                    </form>
+                                )}
+                            </Formik>
+                        </div>
 
                     </div>
                 </div>
 
-                <div className='border-r bg-teal-500 text-center text-white w-[40%] flex justify-center items-center rounded-r-lg'>
+                <div className=' bg-teal-500 text-center text-white w-full md:w-1/3 py-10 flex justify-center items-center rounded-r-lg'>
                     <div className='space-y-5'>
                         <h1 className='text-3xl font-bold'>Hello, Explorer!</h1>
                         <p className=''>Enter Your Personal Details <br /> and  start journey with us</p>

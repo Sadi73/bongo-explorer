@@ -67,10 +67,9 @@ const Register = () => {
 
 
     return (
-        <div className='pt-20'>
-            <div className='flex border mt-5 w-[80%] mx-auto min-h-[550px] rounded-lg'>
-
-                <div className='border-r bg-teal-500 text-center text-white grow flex justify-center items-center rounded-l-lg'>
+        <div className='pt-20 px-5 md:px-0'>
+            <div className='flex flex-col md:flex-row border md:w-[80%] mx-auto rounded-lg gap-5 md:gap-0'>
+                <div className='bg-teal-500 text-center text-white grow flex justify-center items-center rounded-l-lg py-5'>
                     <div className='space-y-5'>
                         <h1 className='text-3xl font-bold'>Welcome Back</h1>
                         <p className=''>To keep connected with us, <br /> please login with your personal info</p>
@@ -80,7 +79,7 @@ const Register = () => {
                     </div>
                 </div>
 
-                <div className='flex items-center justify-center w-[60%]'>
+                <div className='flex items-center justify-center md:w-[60%]'>
                     <div className='space-y-5 '>
                         <h1 className='text-center text-3xl text-teal-500 font-semibold'>Create Account</h1>
                         <div className='flex justify-center'>
@@ -96,167 +95,169 @@ const Register = () => {
                         <Divider>OR</Divider>
 
 
-                        <Formik
-                            initialValues={{ name: '', email: '', photoURL: '', password: '', confirmPassword: '' }}
-                            validationSchema={validationSchema}
-                            onSubmit={(values, { setSubmitting }) => {
-                                registerAccount(values?.email, values?.password)
-                                    .then(result => {
-                                        if (result?.user?.email) {
-                                            updateProfile(auth.currentUser, {
-                                                displayName: values?.name,
-                                                photoURL: values?.photoURL
-                                            }).then(() => {
-                                                axios.post('https://bongo-traveler.vercel.app/users', {
-                                                    name: result?.user?.displayName,
-                                                    email: result?.user?.email,
-                                                    photoURL: result?.user?.photoURL,
-                                                    role: 'USER'
-                                                }).then(res => {
-                                                    if (res?.data) {
-                                                        let timerInterval;
-                                                        Swal.fire({
-                                                            title: "Congratulation!!!",
-                                                            html: "You have created a new account",
-                                                            timer: 2000,
-                                                            timerProgressBar: true,
-                                                            didOpen: () => {
-                                                                Swal.showLoading();
-                                                                const timer = Swal.getPopup().querySelector("b");
-                                                                timerInterval = setInterval(() => {
-                                                                    timer.textContent = `${Swal.getTimerLeft()}`;
-                                                                }, 100);
-                                                            },
-                                                            willClose: () => {
-                                                                clearInterval(timerInterval);
-                                                            }
-                                                        }).then((result) => {
-                                                            /* Read more about handling dismissals below */
-                                                            if (result.dismiss === Swal.DismissReason.timer) {
-                                                                navigate('/')
-                                                            }
-                                                        });
-                                                    }
+                        <div className='py-5'>
+                            <Formik
+                                initialValues={{ name: '', email: '', photoURL: '', password: '', confirmPassword: '' }}
+                                validationSchema={validationSchema}
+                                onSubmit={(values, { setSubmitting }) => {
+                                    registerAccount(values?.email, values?.password)
+                                        .then(result => {
+                                            if (result?.user?.email) {
+                                                updateProfile(auth.currentUser, {
+                                                    displayName: values?.name,
+                                                    photoURL: values?.photoURL
+                                                }).then(() => {
+                                                    axios.post('https://bongo-traveler.vercel.app/users', {
+                                                        name: result?.user?.displayName,
+                                                        email: result?.user?.email,
+                                                        photoURL: result?.user?.photoURL,
+                                                        role: 'USER'
+                                                    }).then(res => {
+                                                        if (res?.data) {
+                                                            let timerInterval;
+                                                            Swal.fire({
+                                                                title: "Congratulation!!!",
+                                                                html: "You have created a new account",
+                                                                timer: 2000,
+                                                                timerProgressBar: true,
+                                                                didOpen: () => {
+                                                                    Swal.showLoading();
+                                                                    const timer = Swal.getPopup().querySelector("b");
+                                                                    timerInterval = setInterval(() => {
+                                                                        timer.textContent = `${Swal.getTimerLeft()}`;
+                                                                    }, 100);
+                                                                },
+                                                                willClose: () => {
+                                                                    clearInterval(timerInterval);
+                                                                }
+                                                            }).then((result) => {
+                                                                /* Read more about handling dismissals below */
+                                                                if (result.dismiss === Swal.DismissReason.timer) {
+                                                                    navigate('/')
+                                                                }
+                                                            });
+                                                        }
+                                                    }).catch(error => console.log(error))
                                                 }).catch(error => console.log(error))
-                                            }).catch(error => console.log(error))
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.log(error)
-                                    })
-                            }}
-                        >
-                            {({
-                                values,
-                                errors,
-                                touched,
-                                handleChange,
-                                handleBlur,
-                                handleSubmit,
-                                isSubmitting,
-                                /* and other goodies */
-                            }) => (
-                                <form
-                                    onSubmit={handleSubmit}
-                                    className='space-y-5'
-                                >
-                                    <div className='w-3/4 mx-auto space-y-3'>
-                                        <Input
-                                            name='name'
-                                            className={`py-3 ${(touched?.name && errors?.name) ? 'border-2 border-red-300' : ''}`}
-                                            placeholder="Name"
-                                            value={values?.name}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            prefix={
-                                                <UserOutlined
-                                                    style={{
-                                                        color: 'rgba(0,0,0,.25)',
-                                                    }}
-                                                />
                                             }
-                                        />
-                                        {(touched?.name && errors?.name) && <p className='text-red-300'>{errors.name}</p>}
+                                        })
+                                        .catch(error => {
+                                            console.log(error)
+                                        })
+                                }}
+                            >
+                                {({
+                                    values,
+                                    errors,
+                                    touched,
+                                    handleChange,
+                                    handleBlur,
+                                    handleSubmit,
+                                    isSubmitting,
+                                    /* and other goodies */
+                                }) => (
+                                    <form
+                                        onSubmit={handleSubmit}
+                                        className='space-y-5'
+                                    >
+                                        <div className='w-3/4 mx-auto space-y-3'>
+                                            <Input
+                                                name='name'
+                                                className={`py-3 ${(touched?.name && errors?.name) ? 'border-2 border-red-300' : ''}`}
+                                                placeholder="Name"
+                                                value={values?.name}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                prefix={
+                                                    <UserOutlined
+                                                        style={{
+                                                            color: 'rgba(0,0,0,.25)',
+                                                        }}
+                                                    />
+                                                }
+                                            />
+                                            {(touched?.name && errors?.name) && <p className='text-red-300'>{errors.name}</p>}
 
-                                        <Input
-                                            name='email'
-                                            className={`py-3 ${(touched?.email && errors?.email) ? 'border-2 border-red-300' : ''}`}
-                                            placeholder="Email"
-                                            value={values?.email}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            prefix={
-                                                <MailOutlined
-                                                    style={{
-                                                        color: 'rgba(0,0,0,.25)',
-                                                    }}
-                                                />
-                                            }
-                                        />
-                                        {(touched?.email && errors?.email) && <p className='text-red-300'>{errors.email}</p>}
+                                            <Input
+                                                name='email'
+                                                className={`py-3 ${(touched?.email && errors?.email) ? 'border-2 border-red-300' : ''}`}
+                                                placeholder="Email"
+                                                value={values?.email}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                prefix={
+                                                    <MailOutlined
+                                                        style={{
+                                                            color: 'rgba(0,0,0,.25)',
+                                                        }}
+                                                    />
+                                                }
+                                            />
+                                            {(touched?.email && errors?.email) && <p className='text-red-300'>{errors.email}</p>}
 
-                                        <Input
-                                            name='photoURL'
-                                            className={`py-3 ${(touched?.photoURL && errors?.photoURL) ? 'border-2 border-red-300' : ''}`}
-                                            placeholder="PhotoURL"
-                                            value={values?.photoURL}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            prefix={
-                                                <FileImageOutlined
-                                                    style={{
-                                                        color: 'rgba(0,0,0,.25)',
-                                                    }}
-                                                />
-                                            }
-                                        />
-                                        {(touched?.photoURL && errors?.photoURL) && <p className='text-red-300'>{errors.photoURL}</p>}
-
-
-                                        <Input.Password
-                                            name='password'
-                                            className={`py-3 ${(touched?.password && errors?.password) ? 'border-2 border-red-300' : ''}`}
-                                            placeholder="Password"
-                                            value={values?.password}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            prefix={
-                                                <LockOutlined
-                                                    style={{
-                                                        color: 'rgba(0,0,0,.25)',
-                                                    }}
-                                                />
-                                            }
-
-                                        />
-                                        {(touched?.password && errors?.password) && <p className='text-red-300'>{errors.password}</p>}
-
-                                        <Input.Password
-                                            name='confirmPassword'
-                                            className={`py-3 ${(touched?.confirmPassword && errors?.confirmPassword) ? 'border-2 border-red-300' : ''}`}
-                                            placeholder="Confirm Password"
-                                            value={values?.confirmPassword}
-                                            onChange={handleChange}
-                                            onBlur={handleBlur}
-                                            prefix={
-                                                <LockOutlined
-                                                    style={{
-                                                        color: 'rgba(0,0,0,.25)',
-                                                    }}
-                                                />
-                                            }
-
-                                        />
-                                        {(touched?.confirmPassword && errors?.confirmPassword) && <p className='text-red-300'>{errors.confirmPassword}</p>}
-                                    </div>
+                                            <Input
+                                                name='photoURL'
+                                                className={`py-3 ${(touched?.photoURL && errors?.photoURL) ? 'border-2 border-red-300' : ''}`}
+                                                placeholder="PhotoURL"
+                                                value={values?.photoURL}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                prefix={
+                                                    <FileImageOutlined
+                                                        style={{
+                                                            color: 'rgba(0,0,0,.25)',
+                                                        }}
+                                                    />
+                                                }
+                                            />
+                                            {(touched?.photoURL && errors?.photoURL) && <p className='text-red-300'>{errors.photoURL}</p>}
 
 
-                                    <div className='flex justify-center'>
-                                        <button type='submit' className='bg-teal-500 text-white px-10 py-3 rounded-full'>Sign Up</button>
-                                    </div>
-                                </form>
-                            )}
-                        </Formik>
+                                            <Input.Password
+                                                name='password'
+                                                className={`py-3 ${(touched?.password && errors?.password) ? 'border-2 border-red-300' : ''}`}
+                                                placeholder="Password"
+                                                value={values?.password}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                prefix={
+                                                    <LockOutlined
+                                                        style={{
+                                                            color: 'rgba(0,0,0,.25)',
+                                                        }}
+                                                    />
+                                                }
+
+                                            />
+                                            {(touched?.password && errors?.password) && <p className='text-red-300'>{errors.password}</p>}
+
+                                            <Input.Password
+                                                name='confirmPassword'
+                                                className={`py-3 ${(touched?.confirmPassword && errors?.confirmPassword) ? 'border-2 border-red-300' : ''}`}
+                                                placeholder="Confirm Password"
+                                                value={values?.confirmPassword}
+                                                onChange={handleChange}
+                                                onBlur={handleBlur}
+                                                prefix={
+                                                    <LockOutlined
+                                                        style={{
+                                                            color: 'rgba(0,0,0,.25)',
+                                                        }}
+                                                    />
+                                                }
+
+                                            />
+                                            {(touched?.confirmPassword && errors?.confirmPassword) && <p className='text-red-300'>{errors.confirmPassword}</p>}
+                                        </div>
+
+
+                                        <div className='flex justify-center'>
+                                            <button type='submit' className='bg-teal-500 text-white px-10 py-3 rounded-full'>Sign Up</button>
+                                        </div>
+                                    </form>
+                                )}
+                            </Formik>
+                        </div>
 
                     </div>
                 </div>
