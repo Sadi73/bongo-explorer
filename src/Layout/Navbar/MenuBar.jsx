@@ -38,7 +38,7 @@ const MenuBar = () => (
   >
     <a onClick={(e) => e.preventDefault()}>
       <Space>
-        <MenuUnfoldOutlined />
+        <MenuUnfoldOutlined className='text-white'/>
       </Space>
     </a>
   </Dropdown>

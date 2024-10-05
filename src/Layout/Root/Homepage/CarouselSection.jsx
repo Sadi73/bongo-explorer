@@ -12,7 +12,7 @@ const CarouselSection = () => {
         <div className='space-y-10'>
             <Heading
                 title='Popular Destination'
-                subTitle='Find Where Most Of The Traveler Explore Most'
+                subTitle='Where Most Of The Traveler Explore Most'
             />
 
             <Carousel autoplay>

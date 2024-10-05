@@ -1,15 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import EmptyPage from '../../Dashboard/EmptyPage/EmptyPage';
+import { RiseLoader } from 'react-spinners';
 
 const AllStories = () => {
-    const [allStories, setAllStories] = useState([])
+    const [allStories, setAllStories] = useState([]);
+    const [loaderVisible, setLoaderVisible] = useState(true);
 
     useEffect(() => {
         axios.get('https://bongo-traveler.vercel.app/stories')
-            .then(res => setAllStories(res?.data))
+            .then(res => {
+                setLoaderVisible(false);
+                setAllStories(res?.data);
+            })
             .catch(error => console.log(error))
     }, []);
+
+    if (loaderVisible) {
+        return (
+            <div className='flex justify-center items-center h-screen'>
+                <RiseLoader color="#36d7b7" />
+            </div>
+        );
+    };
 
     return (
         <div className='pt-28 px-10'>
