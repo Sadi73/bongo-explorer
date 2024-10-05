@@ -30,27 +30,40 @@ const AllPackages = () => {
 
 
     return (
-        <div>
+        <div className='pt-28 md:w-[80%] mx-auto'>
             {AllPackagesList?.length > 0 ?
-                <div className='pt-28  md:w-[80%] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5'>
                     {AllPackagesList.map(eachPackage =>
                         <div
                             key={eachPackage?.id}
-                            className='h-[500px] w-96 relative overflow-hidden'
+                            className='h-[350px] relative overflow-hidden group'  // 'group' added for hover targeting
                             onClick={() => navigate(`/package/${eachPackage?.id}`)}
                         >
-                            <img src={eachPackage?.imageURL} alt="" className='h-full hover:scale-110 transition-transform duration-300' />
+                            {/* Image with hover effect */}
+                            <img src={eachPackage?.imageURL} alt="" className='h-full w-full transition-transform duration-300 hover:scale-110' />
 
-                            <div className='absolute top-0 right-0 text-white text-xl font-bold p-3'>
+                            {/* Gradient Overlay */}
+                            <div className='absolute inset-0 bg-gradient-to-t from-black/70 to-transparent pointer-events-none'></div>
+
+                            <div className='absolute top-0 right-0 text-white text-xl font-bold p-3 z-10'>
                                 <p>${eachPackage?.price}</p>
                             </div>
 
-                            <div className='absolute bottom-0 bg-black bg-opacity-50 text-white px-5 py-2 space-y-2'>
-                                <h1>{eachPackage?.title}</h1>
-                                <Rate allowHalf disabled defaultValue={4.5} />
-                                <p>{eachPackage?.description.slice(0, 100) + ' ... '}</p>
+                            {/* Container for title, rating, and description */}
+                            <div className='absolute bottom-0 w-full text-white px-5 py-3 z-10 bg-gradient-to-t from-black/60 to-transparent'>
+                                {/* Title and Rating (always visible) */}
+                                <div className='flex flex-col space-y-1'>
+                                    <h1 className='text-xl font-mono'>{eachPackage?.title}</h1>
+                                    <Rate allowHalf disabled defaultValue={4.5} />
+                                </div>
+
+                                {/* Description (hidden by default, displayed on hover) */}
+                                <p className='hidden group-hover:block'>
+                                    {eachPackage?.description.slice(0, 100) + ' ... '}
+                                </p>
                             </div>
                         </div>
+
                     )}
                 </div> :
                 <EmptyPage
