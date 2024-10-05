@@ -42,7 +42,7 @@ const Navbar = () => {
                 </div>
 
                 <Link to="/"><button className='text-lg md:text-xl font-medium text-[#FFF8DC] flex items-center'>
-                    <img src={logo} alt="" className='w-20'/> Bongo <br/>Explorer
+                    <img src={logo} alt="" className='w-16'/> Bongo Explorer
                 </button></Link>
             </div>
 
