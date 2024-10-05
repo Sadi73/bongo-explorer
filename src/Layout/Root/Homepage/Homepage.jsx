@@ -18,9 +18,9 @@ const Homepage = () => {
             <div className='w-[80%] mx-auto space-y-32'>
                 <Overview />
 
-                <CarouselSection />
-
                 <VideoSection />
+
+                <CarouselSection />
 
                 <Packages />
 

@@ -17,7 +17,7 @@ const Stories = () => {
         <div className='space-y-10'>
             <Heading
                 title='Traveler Story'
-                subTitle='See the journey of our customer'
+                subTitle='See The Journey Of Our Explorers'
             />
 
             <div className="container grid grid-cols-4">

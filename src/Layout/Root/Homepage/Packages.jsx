@@ -12,7 +12,7 @@ const Packages = () => {
     const { user } = useContext(AuthContext);
     const [allPackages, setAllPackages] = useState([]);
 
-    const slicedData = allPackages.slice(0, 4);
+    const slicedData = allPackages.slice(0, 8);
 
     const handleWishlist = (packageId) => {
 
@@ -83,7 +83,7 @@ const Packages = () => {
 
     };
 
-    
+
     useEffect(() => {
         axios.get('https://bongo-traveler.vercel.app/packages/all')
             .then(res => {
@@ -99,32 +99,26 @@ const Packages = () => {
             {allPackages?.length > 0 ?
                 <div className='space-y-10'>
                     <Heading
-                        title='Popular Packages'
-                        subTitle='Find your dream destination'
+                        title='Top Packages'
+                        subTitle='Find Your Dream Destination'
                     />
 
-                    <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 px-5 lg:px-0'>
+                    <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-10'>
                         {slicedData.map(eachPackage =>
-                            <div key={eachPackage?.id} className='flex border gap-5 min-h-72 rounded-lg shadow-xl'>
-                                <div className='relative'>
-                                    <img src={eachPackage?.imageURL} alt="" className='w-[700px] h-full rounded-l-lg' />
+                            <div key={eachPackage?.id} className='relative border rounded-lg shadow-xl h-[350px] p-3 space-y-3'>
+                                <img src={eachPackage?.imageURL} alt="" className='h-2/3 w-full rounded-lg' />
 
-                                    <div
-                                        className='bg-white bg-opacity-50 px-3 py-2 absolute top-0 right-0 cursor-pointer'
-                                        onClick={() => handleWishlist(eachPackage?.id)}
-                                    >
-                                        <FaRegHeart />
-                                    </div>
+                                <div
+                                    className='absolute top-2 right-5 cursor-pointer text-white'
+                                    onClick={() => handleWishlist(eachPackage?.id)}
+                                >
+                                    <FaRegHeart />
                                 </div>
 
-                                <div className='flex flex-col p-2'>
-                                    <div className='flex-1'>
-                                        <h1 className='text-xl font-bold'>{eachPackage?.title}</h1>
-                                        <p className='my-2'>{eachPackage?.type}</p>
-                                        <hr />
-                                        <p className='mt-5'>{eachPackage?.description.slice(0, 150) + ' ... read more'}</p>
-                                    </div>
-                                    <Link to={`/package/${eachPackage?.id}`}><button className='bg-teal-500 text-white p-2 w-full'>View Details</button></Link>
+                                <div>
+                                    <h1 className='text-center font-mono'>{eachPackage?.title}</h1>
+                                    <p className='text-center italic'>{eachPackage?.type}</p>
+                                    <Link to={`/package/${eachPackage?.id}`}><button className='text-center w-full mt-5 underline'>MORE</button></Link>
                                 </div>
                             </div>
 

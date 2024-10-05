@@ -37,7 +37,7 @@ const TourType = () => {
 
             <Heading
                 title='Tour Type'
-                subTitle='Find Your Tour by'
+                subTitle='Find Your Tour By'
             />
 
             <Swiper

@@ -5,8 +5,8 @@ const VideoSection = () => {
     return (
         <div className='space-y-10'>
             <Heading
-                title='Discover the Beauty of Bangladesh'
-                subTitle='Experience the stunning landscapes and vibrant culture'
+                title='Discover Bangladesh'
+                subTitle='Experience The Stunning Landscapes And Vibrant Culture'
             />
 
             <div className='video-wrapper w-full h-[500px] flex justify-center items-center'>
