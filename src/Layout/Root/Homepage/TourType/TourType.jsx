@@ -12,6 +12,7 @@ import './TourType.css';
 import { Navigation } from 'swiper/modules';
 import { GiHiking } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
+import Heading from '../../../../Components/Heading';
 
 const types = [
     { name: 'hiking' },
@@ -33,10 +34,11 @@ const TourType = () => {
 
     return (
         <div className='md:w-[80%] mx-auto space-y-2'>
-            <p className='text-center'>Find Your Tour by</p>
-            <h1 className='text-center text-3xl'>Tour Type</h1>
 
-            <hr />
+            <Heading
+                title='Tour Type'
+                subTitle='Find Your Tour by'
+            />
 
             <div className='pt-10'>
                 <Swiper

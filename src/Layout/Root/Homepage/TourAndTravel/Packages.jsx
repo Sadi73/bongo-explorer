@@ -5,6 +5,7 @@ import { AuthContext } from '../../../../Providers/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import EmptyPage from '../../../Dashboard/EmptyPage/EmptyPage';
+import Heading from '../../../../Components/Heading';
 
 const Packages = ({ allPackages }) => {
 
@@ -85,7 +86,10 @@ const Packages = ({ allPackages }) => {
         <div className='my-10'>
             {allPackages?.length > 0 ?
                 <div>
-                    <h1 className='text-3xl font-semibold text-center'>Our Packages</h1>
+                    <Heading
+                        title='Our Packages'
+                        subTitle='Find your dream destination'
+                    />
 
                     <div className='grid grid-cols-1 lg:grid-cols-2 gap-5 mt-10 px-5 lg:px-0'>
                         {slicedData.map(eachPackage =>

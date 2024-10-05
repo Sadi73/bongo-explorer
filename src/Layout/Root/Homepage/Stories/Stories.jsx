@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Stories.css';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Heading from '../../../../Components/Heading';
 
 const Stories = () => {
     const [allStories, setAllStories] = useState([])
@@ -14,7 +15,10 @@ const Stories = () => {
 
     return (
         <div className='w-[80%] mx-auto my-20 space-y-5'>
-            <h1 className='text-3xl text-center'>Traveler Story</h1>
+            <Heading
+                title='Traveler Story'
+                subTitle='See the journey of our customer'
+            />
 
             <div className="container grid grid-cols-4">
                 {allStories.slice(0, 8).map((story, index) => (

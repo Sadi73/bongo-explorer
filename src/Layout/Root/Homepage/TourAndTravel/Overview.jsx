@@ -1,9 +1,14 @@
 import React from 'react';
+import Heading from '../../../../Components/Heading';
 
 const Overview = () => {
     return (
         <div>
-            <h1 className='text-3xl font-semibold text-center'>Explore Beautiful Bangladesh</h1>
+
+            <Heading
+                title='Discover Bangladesh'
+                subTitle='Experience the stunning landscapes and vibrant culture'
+            />
 
             <div className='video-wrapper w-full h-[500px] flex justify-center items-center mt-10'>
 

@@ -18,6 +18,7 @@ import person6 from '../../../../assets/person6.jpeg'
 import person7 from '../../../../assets/person7.jpg'
 import person8 from '../../../../assets/person8.jpg'
 import axios from 'axios';
+import Heading from '../../../../Components/Heading';
 
 const MeetGuides = () => {
 
@@ -31,7 +32,10 @@ const MeetGuides = () => {
 
     return (
         <div className='p-10 space-y-10 '>
-            <h1 className='text-center text-5xl'>Our Guides</h1>
+            <Heading
+                title='Our Guides'
+                subTitle='Meet Some Awesome People'
+            />
 
             <Swiper
                 slidesPerView={6}
