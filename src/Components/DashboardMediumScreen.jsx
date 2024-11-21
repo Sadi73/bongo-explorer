@@ -78,9 +78,9 @@ const DashboardMediumScreen = ({ role, pathName }) => {
                 <header className="bg-white flex items-center justify-between p-4 shadow">
                     <button
                         onClick={() => setIsCollapsed(!isCollapsed)}
-                        className="text-xl focus:outline-none"
+                        className="text-xl focus:outline-none flex items-center gap-2"
                     >
-                        <VscThreeBars />
+                        <VscThreeBars /> {pathName.split('/')?.[2]}
                     </button>
                 </header>
 

@@ -27,6 +27,7 @@ const AddNewPackage = () => {
     const navigate = useNavigate();
     const [selectedFile, setSelectedFile] = useState(null);
     const [submitted, setSubmitted] = useState(false);
+    const [uploadedImage, setUploadedImage] = useState(null);
 
     const handleAddPackage = (packageData) => {
         if (!selectedFile) {
@@ -67,7 +68,12 @@ const AddNewPackage = () => {
     };
 
     const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
+        const image = event.target.files[0];
+        setSelectedFile(image);
+        if (image) {
+            const imageUrl = URL.createObjectURL(image);
+            setUploadedImage(imageUrl);
+        }
     };
 
     const validationSchema = Yup.object({
@@ -79,8 +85,8 @@ const AddNewPackage = () => {
 
 
     return (
-        <div className='bg-orange-100 border border-orange-500 p-10 rounded-lg h-[90vh]'>
-            <div className='w-2/3 mx-auto'>
+        <div className='bg-orange-100 border border-orange-500 p-10 rounded-lg min-h-[90vh]'>
+            <div className='xl:w-2/3 mx-auto'>
                 <Formik
                     initialValues={{ title: '', type: '', price: '', description: '' }}
                     validationSchema={validationSchema}
@@ -102,8 +108,8 @@ const AddNewPackage = () => {
                     }) => (
                         <form onSubmit={handleSubmit} className='space-y-5'>
                             <div className='grid grid-cols-12'>
-                                <label htmlFor="" className='col-span-3'>Package Title</label>
-                                <div className='col-span-6'>
+                                <label htmlFor="" className='col-span-4'>Package Title</label>
+                                <div className='col-span-8'>
                                     <Input
                                         name='title'
                                         value={values?.title}
@@ -116,8 +122,8 @@ const AddNewPackage = () => {
                             </div>
 
                             <div className='grid grid-cols-12 items-center'>
-                                <label htmlFor="" className='col-span-3'>Package Type</label>
-                                <div className='col-span-6'>
+                                <label htmlFor="" className='col-span-4'>Package Type</label>
+                                <div className='col-span-8'>
                                     <Select
                                         name='type'
                                         placeholder="Select Type"
@@ -129,8 +135,8 @@ const AddNewPackage = () => {
                             </div>
 
                             <div className='grid grid-cols-12'>
-                                <label htmlFor="" className='col-span-3'>Price</label>
-                                <div className='col-span-6'>
+                                <label htmlFor="" className='col-span-4'>Price</label>
+                                <div className='col-span-8'>
                                     <Input
                                         name='price'
                                         value={values?.price}
@@ -143,8 +149,8 @@ const AddNewPackage = () => {
                             </div>
 
                             <div className='grid grid-cols-12'>
-                                <label htmlFor="" className='col-span-3'>Package Description</label>
-                                <div className='col-span-6'>
+                                <label htmlFor="" className='col-span-4'>Package Description</label>
+                                <div className='col-span-8'>
                                     <TextArea
                                         name='description'
                                         value={values?.description}
@@ -158,16 +164,16 @@ const AddNewPackage = () => {
                             </div>
 
                             <div className='grid grid-cols-12'>
-                                <label htmlFor="" className='col-span-3'>Upload Image</label>
-                                <div className='col-span-6'>
-                                    <input type="file"
-                                        name="" id=""
-                                        onChange={(e) => handleFileChange(e)}
-                                    />
+                                <label htmlFor="" className='col-span-4'>Upload Image</label>
+                                <div className='col-span-8'>
+                                    <input type="file" accept="image/*" onChange={(e) => handleFileChange(e)} />
+                                    {uploadedImage && (
+                                        <img src={uploadedImage} alt="Selected" className='w-64' />
+                                    )}
                                 </div>
                             </div>
 
-                            {submitted ? <Spin /> : <button type='submit' className='bg-orange-300 w-full'>ADD</button>}
+                            {submitted ? <Spin /> : <button type='submit' className='bg-orange-300 w-full py-2'>Add</button>}
 
 
                         </form>
