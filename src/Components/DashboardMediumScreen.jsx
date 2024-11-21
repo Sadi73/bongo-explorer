@@ -75,7 +75,8 @@ const DashboardMediumScreen = ({ role, pathName }) => {
             {/* Main Content Area */}
             <div className="flex-1 flex flex-col">
                 {/* Header */}
-                <header className="bg-white flex items-center justify-between p-4 shadow">
+                <header className="bg-white flex items-center justify-between p-4 shadow"
+                    style={{ background: 'linear-gradient(to right, #2c3e50, #4ca1af)', color: 'white' }}                >
                     <button
                         onClick={() => setIsCollapsed(!isCollapsed)}
                         className="text-xl focus:outline-none flex items-center gap-2"
@@ -85,7 +86,7 @@ const DashboardMediumScreen = ({ role, pathName }) => {
                 </header>
 
                 {/* Outlet Content */}
-                <main className="flex-1 overflow-auto p-4">
+                <main className="flex-1 overflow-auto p-4 background-color-dot">
                     <Outlet />
                 </main>
             </div>

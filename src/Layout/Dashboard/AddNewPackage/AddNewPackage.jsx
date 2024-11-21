@@ -85,102 +85,99 @@ const AddNewPackage = () => {
 
 
     return (
-        <div className='bg-orange-100 border border-orange-500 p-10 rounded-lg min-h-[90vh]'>
-            <div className='xl:w-2/3 mx-auto'>
-                <Formik
-                    initialValues={{ title: '', type: '', price: '', description: '' }}
-                    validationSchema={validationSchema}
-                    onSubmit={(values, { setSubmitting }) => {
-                        setSubmitted(true);
-                        handleAddPackage(values);
-                    }}
-                >
-                    {({
-                        values,
-                        setValues,
-                        errors,
-                        touched,
-                        handleChange,
-                        handleBlur,
-                        handleSubmit,
-                        isSubmitting,
-                        /* and other goodies */
-                    }) => (
-                        <form onSubmit={handleSubmit} className='space-y-5'>
-                            <div className='grid grid-cols-12'>
-                                <label htmlFor="" className='col-span-4'>Package Title</label>
-                                <div className='col-span-8'>
-                                    <Input
-                                        name='title'
-                                        value={values?.title}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        placeholder="Enter Package Title"
-                                        className={`py-3 ${(touched?.title && errors?.title) ? 'border-2 border-red-500' : ''}`}
-                                    />
-                                </div>
+        <div className='xl:w-2/3 mx-auto rounded-lg bg-white bg-opacity-10 p-10 text-white'>
+            <Formik
+                initialValues={{ title: '', type: '', price: '', description: '' }}
+                validationSchema={validationSchema}
+                onSubmit={(values, { setSubmitting }) => {
+                    setSubmitted(true);
+                    handleAddPackage(values);
+                }}
+            >
+                {({
+                    values,
+                    setValues,
+                    errors,
+                    touched,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                    isSubmitting,
+                    /* and other goodies */
+                }) => (
+                    <form onSubmit={handleSubmit} className='space-y-5'>
+                        <div className='grid grid-cols-12 items-center'>
+                            <label htmlFor="" className='col-span-4'>Package Title</label>
+                            <div className='col-span-8'>
+                                <Input
+                                    name='title'
+                                    value={values?.title}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    placeholder="Enter Package Title"
+                                    className={`py-3 ${(touched?.title && errors?.title) ? 'border-2 border-red-500' : ''}`}
+                                />
                             </div>
+                        </div>
 
-                            <div className='grid grid-cols-12 items-center'>
-                                <label htmlFor="" className='col-span-4'>Package Type</label>
-                                <div className='col-span-8'>
-                                    <Select
-                                        name='type'
-                                        placeholder="Select Type"
-                                        onChange={(value) => setValues({ ...values, type: value })}
-                                        options={options}
-                                        className={`w-full ${(touched?.type && errors?.type) ? 'border-2 border-red-500' : ''}`}
-                                    />
-                                </div>
+                        <div className='grid grid-cols-12 items-center'>
+                            <label htmlFor="" className='col-span-4'>Package Type</label>
+                            <div className='col-span-8'>
+                                <Select
+                                    name='type'
+                                    placeholder="Select Type"
+                                    onChange={(value) => setValues({ ...values, type: value })}
+                                    options={options}
+                                    className={`w-full ${(touched?.type && errors?.type) ? 'border-2 border-red-500' : ''}`}
+                                />
                             </div>
+                        </div>
 
-                            <div className='grid grid-cols-12'>
-                                <label htmlFor="" className='col-span-4'>Price</label>
-                                <div className='col-span-8'>
-                                    <Input
-                                        name='price'
-                                        value={values?.price}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        placeholder="Enter Package Price"
-                                        className={`py-3 ${(touched?.price && errors?.price) ? 'border-2 border-red-500' : ''}`}
-                                    />
-                                </div>
+                        <div className='grid grid-cols-12'>
+                            <label htmlFor="" className='col-span-4'>Price</label>
+                            <div className='col-span-8'>
+                                <Input
+                                    name='price'
+                                    value={values?.price}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    placeholder="Enter Package Price"
+                                    className={`py-3 ${(touched?.price && errors?.price) ? 'border-2 border-red-500' : ''}`}
+                                />
                             </div>
+                        </div>
 
-                            <div className='grid grid-cols-12'>
-                                <label htmlFor="" className='col-span-4'>Package Description</label>
-                                <div className='col-span-8'>
-                                    <TextArea
-                                        name='description'
-                                        value={values?.description}
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        rows={4}
-                                        placeholder="Enter Package Description"
-                                        className={`${(touched?.description && errors?.description) ? 'border-2 border-red-500' : ''}`}
-                                    />
-                                </div>
+                        <div className='grid grid-cols-12'>
+                            <label htmlFor="" className='col-span-4'>Package Description</label>
+                            <div className='col-span-8'>
+                                <TextArea
+                                    name='description'
+                                    value={values?.description}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    rows={4}
+                                    placeholder="Enter Package Description"
+                                    className={`${(touched?.description && errors?.description) ? 'border-2 border-red-500' : ''}`}
+                                />
                             </div>
+                        </div>
 
-                            <div className='grid grid-cols-12'>
-                                <label htmlFor="" className='col-span-4'>Upload Image</label>
-                                <div className='col-span-8'>
-                                    <input type="file" accept="image/*" onChange={(e) => handleFileChange(e)} />
-                                    {uploadedImage && (
-                                        <img src={uploadedImage} alt="Selected" className='w-64' />
-                                    )}
-                                </div>
+                        <div className='grid grid-cols-12'>
+                            <label htmlFor="" className='col-span-4'>Upload Image</label>
+                            <div className='col-span-8'>
+                                <input type="file" accept="image/*" onChange={(e) => handleFileChange(e)} />
+                                {uploadedImage && (
+                                    <img src={uploadedImage} alt="Selected" className='w-64' />
+                                )}
                             </div>
+                        </div>
 
-                            {submitted ? <Spin /> : <button type='submit' className='bg-orange-300 w-full py-2'>Add</button>}
+                        {submitted ? <Spin /> : <button type='submit' className='bg-orange-300 w-full py-2'>Add</button>}
 
 
-                        </form>
-                    )}
-                </Formik>
-            </div>
-
+                    </form>
+                )}
+            </Formik>
         </div>
     );
 };
