@@ -7,8 +7,6 @@ import { UserOutlined } from '@ant-design/icons';
 import { AuthContext } from '../../Providers/AuthProvider';
 import logo from '../../assets/logo.png';
 
-
-
 const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext);
@@ -23,7 +21,7 @@ const Navbar = () => {
         {
             key: '1',
             label: (
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/dashboard/my-profile">Dashboard</Link>
             ),
         },
         {
