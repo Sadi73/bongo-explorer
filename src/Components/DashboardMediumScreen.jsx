@@ -12,9 +12,8 @@ const DashboardMediumScreen = ({ role, pathName }) => {
         <div className="flex h-screen">
             {/* Sidebar */}
             <div
-                className={`bg-gray-800 text-white h-screen transition-all duration-300 ${
-                    isCollapsed ? 'w-16' : 'w-64'
-                }`}
+                className={`bg-gray-800 text-white h-screen transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'
+                    }`}
             >
                 {/* Logo Section */}
                 <div className="p-4 flex justify-center items-center">
@@ -32,7 +31,7 @@ const DashboardMediumScreen = ({ role, pathName }) => {
                                 to={item?.path}
                                 className={`flex items-center gap-4 p-2 rounded hover:bg-gray-700 ${pathName === item?.path ? 'bg-gray-700' : ''}`}
                             >
-                                <span className="text-lg">{item?.icon}</span>
+                                <img src={item?.icon} className='w-5' />
                                 {!isCollapsed && <span>{item?.label}</span>}
                             </Link>
                         ))}
@@ -44,7 +43,7 @@ const DashboardMediumScreen = ({ role, pathName }) => {
                                 to={item?.path}
                                 className={`flex items-center gap-4 p-2 rounded hover:bg-gray-700 ${pathName === item?.path ? 'bg-gray-700' : ''}`}
                             >
-                                <span className="text-lg">{item?.icon}</span>
+                                <img src={item?.icon} className='w-5' />
                                 {!isCollapsed && <span>{item?.label}</span>}
                             </Link>
                         ))}
@@ -56,7 +55,7 @@ const DashboardMediumScreen = ({ role, pathName }) => {
                                 to={item?.path}
                                 className={`flex items-center gap-4 p-2 rounded hover:bg-gray-700 ${pathName === item?.path ? 'bg-gray-700' : ''}`}
                             >
-                                <span className="text-lg">{item?.icon}</span>
+                                <img src={item?.icon} className='w-5' />
                                 {!isCollapsed && <span>{item?.label}</span>}
                             </Link>
                         ))}

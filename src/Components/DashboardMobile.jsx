@@ -3,8 +3,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { adminItems, guideItems, userItems } from '../utils/MenuItems';
 import { VscThreeBars } from 'react-icons/vsc';
+import { FaHome } from 'react-icons/fa';
 
-const DashboardMobile = ({ role , pathName}) => {
+const DashboardMobile = ({ role, pathName }) => {
     const [isDrawerVisible, setIsDrawerVisible] = useState(false);
     const drawerRef = useRef(null);
 
@@ -27,7 +28,7 @@ const DashboardMobile = ({ role , pathName}) => {
             document.removeEventListener('mousedown', handleClickOutside);
             document.body.style.overflow = 'auto';
         };
-    }, [isDrawerVisible]); 
+    }, [isDrawerVisible]);
 
     return (
         <>
@@ -45,9 +46,14 @@ const DashboardMobile = ({ role , pathName}) => {
                     className={`fixed top-0 left-0 h-full w-42 bg-gray-800 text-white transform ${isDrawerVisible ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out z-50 flex flex-col justify-between`}
                 >
                     <ul className='font-mono'>
-                        {role === 'USER' && userItems.map((item, index) => <li key={index} className={`p-4 ${pathName === item?.path && 'bg-gray-700'}`}><Link to={item?.path}>{item?.label}</Link></li>)}
-                        {role === 'ADMIN' && adminItems.map((item, index) => <li key={index} className={`p-4 ${pathName === item?.path && 'bg-gray-700'}`}><Link to={item?.path}>{item?.label}</Link></li>)}
-                        {role === 'GUIDE' && guideItems.map((item, index) => <li key={index} className={`p-4 ${pathName === item?.path && 'bg-gray-700'}`}><Link to={item?.path}>{item?.label}</Link></li>)}
+                        {role === 'USER' && userItems.map((item, index) => <li key={index} className={`p-4 ${pathName === item?.path && 'bg-gray-700'}`}><Link to={item?.path} className='flex items-center gap-3'><img src={item?.icon} className='w-5'/> {item?.label}</Link></li>)}
+                        {role === 'ADMIN' && adminItems.map((item, index) => <li key={index} className={`p-4 ${pathName === item?.path && 'bg-gray-700'}`}><Link to={item?.path} className='flex items-center gap-3'><img src={item?.icon} className='w-5'/> {item?.label}</Link></li>)}
+                        {role === 'GUIDE' && guideItems.map((item, index) => <li key={index} className={`p-4 ${pathName === item?.path && 'bg-gray-700'}`}><Link to={item?.path} className='flex items-center gap-3'><img src={item?.icon} className='w-5'/> {item?.label}</Link></li>)}
+
+
+                        <hr className="my-4 border-gray-600" />
+
+                        <li className='p-4'><Link to='/' className='flex items-center gap-3'> <FaHome /> Home</Link></li>
                     </ul>
 
                     <button

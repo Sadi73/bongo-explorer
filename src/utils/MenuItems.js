@@ -1,34 +1,35 @@
-import { CgAssign, CgProfile } from "react-icons/cg";
-import { FaCodePullRequest } from "react-icons/fa6";
-import { HiOutlineViewGridAdd } from "react-icons/hi";
-import { IoIosBookmark } from "react-icons/io";
-import { MdOutlineManageAccounts } from "react-icons/md";
-import { TbJewishStar } from "react-icons/tb";
+import addNew from '../assets/svg/addNew.svg';
+import assigned from '../assets/svg/assigned.svg';
+import booking from '../assets/svg/booking.svg';
+import manageUser from '../assets/svg/manageUser.svg';
+import profileIcon from '../assets/svg/profile.svg';
+import request from '../assets/svg/request.svg';
+import wishlist from '../assets/svg/wishlist.svg';
 
 export const userItems = [
     {
         key: 'profile',
         path: '/dashboard/my-profile',
         label: 'My Profile',
-        icon: CgProfile 
+        icon: profileIcon 
     },
     {
         key: 'wishlist',
         path: '/dashboard/my-wishlist',
         label: 'My Wishlist',
-        icon: TbJewishStar 
+        icon: wishlist 
     },
     {
         key: 'bookings',
         path: '/dashboard/my-bookings',
         label: 'My Bookings',
-        icon: IoIosBookmark 
+        icon: booking 
     },
     {
         key: 'request-to-admin',
         path: '/dashboard/request-to-admin',
         label: 'Request To Admin',
-        icon: FaCodePullRequest 
+        icon: request 
     },
 ];
 
@@ -37,13 +38,13 @@ export const guideItems = [
         key: 'profile',
         path: '/dashboard/my-profile',
         label: 'My Profile',
-        icon: CgProfile 
+        icon: profileIcon 
     },
     {
         key: 'assigned-tour',
         path: '/dashboard/my-assigned-tours',
         label: 'My Assigned Tours',
-        icon: CgAssign 
+        icon: assigned 
     },
 ];
 
@@ -52,18 +53,18 @@ export const adminItems = [
         key: 'profile',
         path: '/dashboard/my-profile',
         label: 'My Profile',
-        icon: CgProfile 
+        icon: profileIcon 
     },
     {
         key: 'add-package',
         path: '/dashboard/add-package',
         label: 'Add New Package',
-        icon: HiOutlineViewGridAdd 
+        icon: addNew 
     },
     {
         key: 'manage-user',
         path: '/dashboard/manage-user',
         label: 'Manage User',
-        icon: MdOutlineManageAccounts 
+        icon: manageUser 
     },
 ];
