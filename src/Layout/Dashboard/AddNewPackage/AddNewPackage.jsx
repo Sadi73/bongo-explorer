@@ -79,11 +79,8 @@ const AddNewPackage = () => {
 
 
     return (
-        <div className='mt-10 min-h-[600px] py-5 bg-gradient-to-r from-teal-200 to-teal-500 flex items-center'>
-            <div className='w-1/2'></div>
-            <div className='bg-orange-100 border border-orange-500 p-10 rounded-lg'>
-
-
+        <div className='bg-orange-100 border border-orange-500 p-10 rounded-lg h-[90vh]'>
+            <div className='w-2/3 mx-auto'>
                 <Formik
                     initialValues={{ title: '', type: '', price: '', description: '' }}
                     validationSchema={validationSchema}
@@ -104,67 +101,80 @@ const AddNewPackage = () => {
                         /* and other goodies */
                     }) => (
                         <form onSubmit={handleSubmit} className='space-y-5'>
-                            <div>
-                                <label htmlFor="">Package Title</label>
-                                <Input
-                                    name='title'
-                                    value={values?.title}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    placeholder="Enter Package Title"
-                                    className={`py-3 ${(touched?.title && errors?.title) ? 'border-2 border-red-500' : ''}`}
-                                />
+                            <div className='grid grid-cols-12'>
+                                <label htmlFor="" className='col-span-3'>Package Title</label>
+                                <div className='col-span-6'>
+                                    <Input
+                                        name='title'
+                                        value={values?.title}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        placeholder="Enter Package Title"
+                                        className={`py-3 ${(touched?.title && errors?.title) ? 'border-2 border-red-500' : ''}`}
+                                    />
+                                </div>
                             </div>
 
-                            <div>
-                                <label htmlFor="">Package Type</label>
-                                <Select
-                                    name='type'
-                                    placeholder="Select Type"
-                                    onChange={(value) => setValues({ ...values, type: value })}
-                                    options={options}
-                                    className={`w-full ${(touched?.type && errors?.type) ? 'border-2 border-red-500' : ''}`}
-                                />
+                            <div className='grid grid-cols-12 items-center'>
+                                <label htmlFor="" className='col-span-3'>Package Type</label>
+                                <div className='col-span-6'>
+                                    <Select
+                                        name='type'
+                                        placeholder="Select Type"
+                                        onChange={(value) => setValues({ ...values, type: value })}
+                                        options={options}
+                                        className={`w-full ${(touched?.type && errors?.type) ? 'border-2 border-red-500' : ''}`}
+                                    />
+                                </div>
                             </div>
 
-                            <div>
-                                <label htmlFor="">Price</label>
-                                <Input
-                                    name='price'
-                                    value={values?.price}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    placeholder="Enter Package Price"
-                                    className={`py-3 ${(touched?.price && errors?.price) ? 'border-2 border-red-500' : ''}`}
-                                />
+                            <div className='grid grid-cols-12'>
+                                <label htmlFor="" className='col-span-3'>Price</label>
+                                <div className='col-span-6'>
+                                    <Input
+                                        name='price'
+                                        value={values?.price}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        placeholder="Enter Package Price"
+                                        className={`py-3 ${(touched?.price && errors?.price) ? 'border-2 border-red-500' : ''}`}
+                                    />
+                                </div>
                             </div>
 
-                            <div>
-                                <label htmlFor="">Package Description</label>
-                                <TextArea
-                                    name='description'
-                                    value={values?.description}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    rows={4}
-                                    placeholder="Enter Package Description"
-                                    className={`py-3 ${(touched?.description && errors?.description) ? 'border-2 border-red-500' : ''}`} />
+                            <div className='grid grid-cols-12'>
+                                <label htmlFor="" className='col-span-3'>Package Description</label>
+                                <div className='col-span-6'>
+                                    <TextArea
+                                        name='description'
+                                        value={values?.description}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        rows={4}
+                                        placeholder="Enter Package Description"
+                                        className={`${(touched?.description && errors?.description) ? 'border-2 border-red-500' : ''}`}
+                                    />
+                                </div>
                             </div>
 
-                            <div>
-                                <label htmlFor="">Upload Image</label>
-                                <input type="file"
-                                    name="" id="" onChange={(e) => handleFileChange(e)} />
+                            <div className='grid grid-cols-12'>
+                                <label htmlFor="" className='col-span-3'>Upload Image</label>
+                                <div className='col-span-6'>
+                                    <input type="file"
+                                        name="" id=""
+                                        onChange={(e) => handleFileChange(e)}
+                                    />
+                                </div>
                             </div>
 
-                            {submitted ? <Spin /> : <button type='submit' className='bg-orange-300 py-3 w-full'>ADD</button>}
+                            {submitted ? <Spin /> : <button type='submit' className='bg-orange-300 w-full'>ADD</button>}
 
 
                         </form>
                     )}
                 </Formik>
-
             </div>
+
         </div>
     );
 };
