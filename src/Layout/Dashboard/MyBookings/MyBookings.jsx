@@ -23,7 +23,7 @@ const MyBookings = () => {
     }, [reload]);
 
     return (
-        <div className='mt-10'>
+        <div className='mt-10 text-white'>
             {myBookedData.length > 0 ? myBookedData.map(item =>
                 <div key={item?._id}
                     className='mb-5'

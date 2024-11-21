@@ -29,7 +29,7 @@ const RequestToAdmin = () => {
     };
 
     return (
-        <div className='flex justify-center mt-20'>
+        <div className='flex justify-center mt-20 text-white'>
             <div className='w-[500px] border px-10 py-5 space-y-5 rounded-lg'>
                 <p className='text-xl font-bold text-center'>Request to Admin</p>
                 <p className='text-center'>I have enough experience of travelling. I am confident that I can be a valuable tour guide.</p>

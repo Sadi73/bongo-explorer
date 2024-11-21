@@ -26,7 +26,7 @@ const MyAssignedTours = () => {
     }, [reload]);
 
     return (
-        <div className='mt-10'>
+        <div className='mt-10 text-white'>
             {myAssignedBooking.length > 0 ?
                 myAssignedBooking.map(booking =>
                     <div key={booking?._id }

@@ -106,7 +106,7 @@ const AddNewPackage = () => {
                     /* and other goodies */
                 }) => (
                     <form onSubmit={handleSubmit} className='space-y-5'>
-                        <div className='grid grid-cols-12 items-center'>
+                        <div className='md:grid grid-cols-12 items-center'>
                             <label htmlFor="" className='col-span-4'>Package Title</label>
                             <div className='col-span-8'>
                                 <Input
@@ -115,14 +115,15 @@ const AddNewPackage = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     placeholder="Enter Package Title"
-                                    className={`py-3 ${(touched?.title && errors?.title) ? 'border-2 border-red-500' : ''}`}
+                                    className={`py-3 bg-white/10 text-white placeholder:text-white/50 hover:bg-white/10 focus:bg-white/10 ${(touched?.title && errors?.title) ? 'border-2 border-red-500' : ''}`}
+
                                 />
                             </div>
                         </div>
 
-                        <div className='grid grid-cols-12 items-center'>
+                        <div className='md:grid grid-cols-12 items-center'>
                             <label htmlFor="" className='col-span-4'>Package Type</label>
-                            <div className='col-span-8'>
+                            <div id='add-new-package-select' className='col-span-8'>
                                 <Select
                                     name='type'
                                     placeholder="Select Type"
@@ -133,7 +134,7 @@ const AddNewPackage = () => {
                             </div>
                         </div>
 
-                        <div className='grid grid-cols-12'>
+                        <div className='md:grid grid-cols-12'>
                             <label htmlFor="" className='col-span-4'>Price</label>
                             <div className='col-span-8'>
                                 <Input
@@ -142,12 +143,12 @@ const AddNewPackage = () => {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     placeholder="Enter Package Price"
-                                    className={`py-3 ${(touched?.price && errors?.price) ? 'border-2 border-red-500' : ''}`}
+                                    className={`py-3 bg-white/10 text-white placeholder:text-white/50 hover:bg-white/10 focus:bg-white/10 ${(touched?.price && errors?.price) ? 'border-2 border-red-500' : ''}`}
                                 />
                             </div>
                         </div>
 
-                        <div className='grid grid-cols-12'>
+                        <div className='md:grid grid-cols-12'>
                             <label htmlFor="" className='col-span-4'>Package Description</label>
                             <div className='col-span-8'>
                                 <TextArea
@@ -157,12 +158,12 @@ const AddNewPackage = () => {
                                     onBlur={handleBlur}
                                     rows={4}
                                     placeholder="Enter Package Description"
-                                    className={`${(touched?.description && errors?.description) ? 'border-2 border-red-500' : ''}`}
+                                    className={`py-3 bg-white/10 text-white placeholder:text-white/50 hover:bg-white/10 focus:bg-white/10 ${(touched?.description && errors?.description) ? 'border-2 border-red-500' : ''}`}
                                 />
                             </div>
                         </div>
 
-                        <div className='grid grid-cols-12'>
+                        <div className='md:grid grid-cols-12'>
                             <label htmlFor="" className='col-span-4'>Upload Image</label>
                             <div className='col-span-8'>
                                 <input type="file" accept="image/*" onChange={(e) => handleFileChange(e)} />

@@ -7,7 +7,7 @@ const MyProfile = () => {
     const { userDetails, isLoading } = useContext(UserContext);
 
     return (
-        <div className='mt-20 bg-[#f9f9f9] flex md:flex-col flex-col-reverse text-center items-center'>
+        <div className='mt-20 bg-white bg-opacity-10 p-10 text-white flex md:flex-col flex-col-reverse text-center items-center'>
             <div className='leading-8'>
                 <p >Australia</p>
                 <h1 className='text-2xl'>Want to see the countryside</h1>

@@ -23,7 +23,7 @@ const MyWishlist = () => {
 
 
     return (
-        <div className='mt-10'>
+        <div className='mt-10 text-white'>
 
             {myWishedData.length > 0 ? myWishedData.map(item => <div key={item?._id} className='mb-5 shadow-xl'>
                 <PackageCard

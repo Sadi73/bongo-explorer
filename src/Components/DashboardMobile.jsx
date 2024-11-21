@@ -32,7 +32,9 @@ const DashboardMobile = ({ role, pathName }) => {
 
     return (
         <>
-            <div className=' flex items-center justify-between px-5 md:px-10 mt-5 pb-8 border-b relative '>
+            <div className=' flex items-center justify-between px-5 md:px-10 mt-5 pb-8 border-b relative '
+             style={{ background: 'linear-gradient(to right, #2c3e50, #4ca1af)', color: 'white' }}   
+            >
 
                 <div
                     className='lg:hidden'
@@ -66,7 +68,7 @@ const DashboardMobile = ({ role, pathName }) => {
 
             </div>
 
-            <div>
+            <div className='background-color-dot'>
                 <Outlet />
             </div>
         </>
